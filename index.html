@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>HEX车间报废分析看板 | 2026年5月数据驾驶舱</title>
-    <!-- 引入 ECharts 核心库和轻量图表工具 -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <!-- 字体与图标库 -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <title>HEX车间报废分析看板 | 2026年5月</title>
+    <!-- 引入 Font Awesome 6 (免费图标库) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入 ECharts 核心库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
 
         body {
-            background: #f0f2f6;
-            font-family: 'Inter', sans-serif;
-            padding: 24px 32px;
-            color: #1e293b;
+            background: #f0f2f8;
+            padding: 24px 20px;
         }
 
         /* 整体容器 */
@@ -29,46 +27,42 @@
             margin: 0 auto;
         }
 
-        /* 头部 */
+        /* 头部区域 */
         .header {
+            margin-bottom: 28px;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: flex-end;
             flex-wrap: wrap;
-            margin-bottom: 28px;
-            background: white;
-            padding: 20px 28px;
-            border-radius: 28px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.05);
+            gap: 16px;
         }
         .title-section h1 {
             font-size: 1.9rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #1E3A8A, #3B82F6);
-            background-clip: text;
+            background: linear-gradient(135deg, #1A2A3F, #2C4C6E);
             -webkit-background-clip: text;
+            background-clip: text;
             color: transparent;
             letter-spacing: -0.3px;
         }
         .title-section p {
-            color: #5b6e8c;
+            color: #5a6874;
             margin-top: 6px;
             font-weight: 500;
             font-size: 0.9rem;
         }
         .badge-date {
-            background: #eef2ff;
-            padding: 8px 18px;
-            border-radius: 40px;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 60px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
             font-weight: 600;
-            color: #1e40af;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            color: #1e4663;
+            border: 1px solid #e2e8f0;
         }
         .badge-date i {
-            font-size: 1rem;
+            margin-right: 8px;
+            color: #3b82f6;
         }
 
         /* KPI 卡片网格 */
@@ -81,15 +75,16 @@
         .kpi-card {
             background: white;
             border-radius: 28px;
-            padding: 20px 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            padding: 20px 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02);
             transition: all 0.2s ease;
-            border: 1px solid rgba(0,0,0,0.04);
-            backdrop-filter: blur(0px);
+            border: 1px solid rgba(203, 213, 225, 0.4);
+            backdrop-filter: blur(2px);
         }
         .kpi-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 25px -12px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 25px -12px rgba(0,0,0,0.08);
+            border-color: #cbd5e1;
         }
         .kpi-title {
             font-size: 0.85rem;
@@ -105,76 +100,84 @@
         .kpi-value {
             font-size: 2.2rem;
             font-weight: 800;
-            color: #0f172a;
+            color: #0f2b3d;
             line-height: 1.2;
             margin-bottom: 6px;
         }
         .kpi-sub {
             font-size: 0.75rem;
-            color: #6c86a3;
-            border-top: 1px solid #eef2ff;
-            margin-top: 12px;
+            color: #6f7d95;
+            border-top: 1px solid #eef2f6;
+            margin-top: 10px;
             padding-top: 8px;
         }
-        .trend-up { color: #dc2626; }
-        .trend-down { color: #10b981; }
+        .trend-up { color: #e53e3e; background: #fff5f5; border-radius: 20px; padding: 2px 8px; display: inline-block; font-weight: 600;}
+        .trend-down { color: #38a169; background: #f0fff4; border-radius: 20px; padding: 2px 8px; display: inline-block; font-weight: 600;}
 
-        /* 双图表行 */
-        .charts-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+        /* 双图布局 */
+        .chart-row {
+            display: flex;
+            flex-wrap: wrap;
             gap: 24px;
             margin-bottom: 32px;
         }
-        .chart-card {
+        .chart-box {
+            flex: 1;
+            min-width: 280px;
             background: white;
             border-radius: 28px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-            padding: 18px 16px 12px 16px;
-            border: 1px solid #eef2ff;
+            padding: 16px 12px 12px 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f8;
             transition: all 0.2s;
         }
-        .chart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            padding: 0 8px;
-        }
-        .chart-header h3 {
-            font-size: 1.1rem;
+        .chart-box h3 {
+            font-size: 1.2rem;
             font-weight: 600;
+            margin-left: 12px;
+            margin-bottom: 12px;
+            color: #1e2f41;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .chart-container {
             width: 100%;
-            height: 320px;
+            height: 360px;
         }
-
-        /* 缺陷分析 - 条形图区域全宽 */
         .full-width-chart {
             background: white;
             border-radius: 28px;
+            padding: 16px;
             margin-bottom: 32px;
-            padding: 18px 16px 12px 16px;
-            border: 1px solid #eef2ff;
+            border: 1px solid #eef2f8;
         }
-        .full-width-chart .chart-container {
-            height: 380px;
+        .full-width-chart h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-left: 8px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* 详细数据表格 */
+        /* 表格区域 */
         .data-table-wrapper {
             background: white;
             border-radius: 28px;
+            padding: 8px 0 8px 0;
             overflow-x: auto;
-            padding: 0px;
-            border: 1px solid #eef2ff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f8;
         }
         .data-table-wrapper h3 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
-            padding: 20px 24px 8px 24px;
+            margin: 12px 20px 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         table {
             width: 100%;
@@ -183,280 +186,310 @@
             min-width: 1000px;
         }
         th {
-            background: #f8fafd;
+            background: #f8fafc;
             padding: 14px 12px;
             text-align: center;
             font-weight: 600;
-            color: #1e2c3a;
-            border-bottom: 1.5px solid #e2e8f0;
-            font-size: 0.75rem;
-            letter-spacing: 0.3px;
+            color: #2c3e50;
+            border-bottom: 2px solid #e2e8f0;
         }
         td {
             padding: 12px 8px;
             text-align: center;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid #edf2f7;
+            color: #1f2a3e;
             font-weight: 500;
-            color: #1e293b;
         }
         tr:hover td {
             background-color: #fafcff;
         }
-        .category-highlight {
+        .product-badge {
             font-weight: 700;
-            background-color: #fef9e3;
+            background: #eef2ff;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
         }
-        .table-footer-note {
-            padding: 14px 24px;
+        .footer-note {
+            margin-top: 24px;
+            text-align: right;
             font-size: 0.7rem;
-            color: #6b7280;
-            border-top: 1px solid #eef2ff;
-            background: #ffffff;
+            color: #7f8c8d;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 16px;
         }
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
             body { padding: 16px; }
-            .charts-row { grid-template-columns: 1fr; }
             .kpi-value { font-size: 1.6rem; }
         }
-        .fa, .fas { color: #3b82f6; }
     </style>
 </head>
 <body>
 <div class="dashboard-container">
-    <!-- 头部 -->
     <div class="header">
         <div class="title-section">
-            <h1><i class="fas fa-chalkboard-user" style="margin-right: 10px; color:#2563eb;"></i>HEX车间 · 报废管控驾驶舱</h1>
-            <p>基于2026年5月实际报废数据 | 动态监控 & 缺陷归因分析</p>
+            <h1><i class="fas fa-chalkboard-user" style="color:#2c6e9e;"></i> HEX车间 · 报废全景看板</h1>
+            <p>2026年5月 | 报废明细 & 多维归因分析 | 动态可视化报表</p>
         </div>
         <div class="badge-date">
-            <i class="fas fa-calendar-alt"></i> 统计周期：2026年5月
-            <i class="fas fa-industry" style="margin-left: 12px;"></i> 换热器事业部
+            <i class="fas fa-calendar-alt"></i> 数据截止：2026年5月31日
         </div>
     </div>
 
-    <!-- KPI指标 动态计算 -->
-    <div class="kpi-grid" id="kpiContainer"></div>
+    <!-- KPI 卡片区 - 动态计算核心指标 -->
+    <div class="kpi-grid" id="kpiGrid"></div>
 
-    <!-- 双图: 各产品报废金额 vs 报废率对比 + 报废趋势/构成? 实际做产品报废金额柱状图+率折线图 -->
-    <div class="charts-row">
-        <div class="chart-card">
-            <div class="chart-header">
-                <h3><i class="fas fa-chart-simple"></i> 产品报废金额 & 实际报废率</h3>
-                <span style="font-size:12px; background:#eef2ff; padding:4px 8px; border-radius:20px;">金额(元) / 率(%)</span>
-            </div>
-            <div id="chart-product" class="chart-container"></div>
+    <!-- 图表行：报废金额 TOP产品 + 报废率对比柱状图 -->
+    <div class="chart-row">
+        <div class="chart-box">
+            <h3><i class="fas fa-chart-pie" style="color:#f97316;"></i> 各产品报废金额占比</h3>
+            <div id="pieChart" class="chart-container"></div>
         </div>
-        <div class="chart-card">
-            <div class="chart-header">
-                <h3><i class="fas fa-bullseye"></i> 目标 vs 实际报废率对比</h3>
-                <span style="font-size:12px;">控制红线警戒</span>
-            </div>
-            <div id="chart-target" class="chart-container"></div>
+        <div class="chart-box">
+            <h3><i class="fas fa-chart-line" style="color:#0f6e3f;"></i> 报废率 vs 目标控制线</h3>
+            <div id="barTargetChart" class="chart-container"></div>
         </div>
     </div>
 
-    <!-- 全宽缺陷金额TOP分析 (主缺陷原因占比) 基于合计缺陷金额堆叠? 展示主要缺陷类别占比饼图或者用条形图展示各缺陷总金额 -->
+    <!-- 全宽图表：报废原因分类汇总 (按大类金额堆叠) -->
     <div class="full-width-chart">
-        <div class="chart-header">
-            <h3><i class="fas fa-bug"></i> 全车间缺陷类别累计金额 (前道、碰伤、来料、未焊合等) — 不良根因分析</h3>
-            <span style="font-size:12px;">单位：元 | 基于合计报废数据</span>
-        </div>
-        <div id="chart-defects" class="chart-container" style="height: 360px;"></div>
+        <h3><i class="fas fa-clipboard-list" style="color:#3b82f6;"></i> 缺陷原因分布（按金额TOP 6 + 其他）</h3>
+        <div id="reasonBarChart" style="height: 420px; width: 100%;"></div>
     </div>
 
-    <!-- 详细数据表格 展示每个产品线报废明细 -->
+    <!-- 详细数据表格 -->
     <div class="data-table-wrapper">
-        <h3><i class="fas fa-table-list"></i> 各产品线报废明细 & 缺陷拆解 (金额/元)</h3>
-        <div style="overflow-x: auto;">
-            <table id="detailTable">
-                <thead id="tableHead"></thead>
-                <tbody id="tableBody"></tbody>
-            </table>
-        </div>
-        <div class="table-footer-note">
-            <i class="fas fa-chart-line"></i> 注：报废金额为实际报废金额（已扣除索赔），报废率 = 实际报废金额 / 产值；目标报废率为车间月度控制标准。
-        </div>
+        <h3><i class="fas fa-table-list"></i> 产品级别详细报废数据</h3>
+        <table id="detailTable">
+            <thead>
+                <tr>
+                    <th>产品类别</th><th>报废当月限额(¥)</th><th>报废金额(¥)</th><th>索赔金额(¥)</th><th>实际报废金额(¥)</th><th>产值(¥)</th>
+                    <th>当月实际报废率</th><th>报废控制目标</th><th>前道金额</th><th>碰伤金额</th><th>来料金额</th><th>主/扁未焊合</th>
+                    <th>钎焊金额</th><th>其它金额</th><th>变形金额</th><th>翅片掉带</th><th>检测金额</th><th>火焰焊金额</th><th>呛管金额</th><th>错漏装</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- 动态填充 -->
+            </tbody>
+        </table>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-chart-simple"></i> 注：实际报废金额 = 报废金额 - 索赔 | 报废率 = 实际报废金额 / 产值 | 数据基于HEX车间5月原始汇总
     </div>
 </div>
 
 <script>
-    // 根据Excel提供数据构建JS对象 (精确匹配汇总sheet)
-    const products = [
-        { name: "冷凝器", 
-         报废当月限额: 85717.6949855559, 报废金额: 47133.83304295847, 索赔: 5972.108291575468, 实际报废: 41161.724751383, 产值: 3772086.61393519, 当月报废率: 0.01091218971465808, 目标率: 0.01,
-         缺陷明细: { "前道": 18429.591830901867, "碰伤": 3080.8475841509357, "来料": 5498.781990575468, "主与扁未焊合": 1558.261850726404, "钎焊": 4797.022840575468, "其它": 204.701729, "变形": 3580.410309, "翅片掉带": 294.234425575468, "检测": 1380.9251733018718, "火焰焊": 937.5333395754681, "呛管": 0, "错、漏装": 314.67319899999995 } 
-        },
-        { name: "油冷器", 
-         报废当月限额: 18338.81968002013, 报废金额: 10623.0078786312, 索赔: 133.134486, 实际报废: 10489.8733926312, 产值: 1334722.9528196196, 当月报废率: 0.007859214056723312, 目标率: 0.007,
-         缺陷明细: { "前道": 2147.9441266311997, "碰伤": 4272.332346, "来料": 133.134486, "主与扁未焊合": 199.701729, "钎焊": 586.593658, "其它": 19245.2170188527, "变形": 1318.8333310000003, "翅片掉带": 736.7175050000001, "检测": 673.691626, "火焰焊": 282.790099, "呛管": 0, "错、漏装": 66.567243 }
-        },
-        { name: "蒸发器", 
-         报废当月限额: 269740.08369759016, 报废金额: 219955.61170200142, 索赔: 17761.210448206377, 实际报废: 202194.40125379505, 产值: 17633514.720330894, 当月报废率: 0.01146648325422448, 目标率: 0.01,
-         缺陷明细: { "前道": 90373.08004892347, "碰伤": 16097.970679271622, "来料": 20643.96507919377, "主与扁未焊合": 18935.948234263222, "钎焊": 23291.957811189575, "其它": 2504.2939109999998, "变形": 3004.5604019957977, "翅片掉带": 2798.5936135810684, "检测": 7255.565191991605, "火焰焊": 8668.823487048443, "呛管": 61.891302, "错、漏装": 9578.038833690563 }
-        },
-        { name: "水箱", 
-         报废当月限额: 60691.737006961484, 报废金额: 42536.770717570056, 索赔: 627.768231, 实际报废: 41909.002486570054, 产值: 2682109.1684978264, 当月报废率: 0.015625390263306137, 目标率: 0.012,
-         缺陷明细: { "前道": 35871.90146857001, "碰伤": 1172.174446, "来料": 0, "主与扁未焊合": 542.612972, "钎焊": 98.117078, "其它": 2909.089823826482, "变形": 369.423564, "翅片掉带": 143.56946, "检测": 1488.2990019999997, "火焰焊": 0, "呛管": 0, "错、漏装": 346.37881600000003 }
-        },
-        { name: "内冷", 
-         报废当月限额: 77047.78393613009, 报废金额: 67090.17424511875, 索赔: 6369.018938433788, 实际报废: 60721.15530668496, 产值: 4736635.568234791, 当月报废率: 0.012819469522607584, 目标率: 0.006,
-         缺陷明细: { "前道": 29264.815646739957, "碰伤": 7339.832361041095, "来料": 6500.571990648401, "主与扁未焊合": 3578.1552643972573, "钎焊": 4335.1391407945175, "其它": 2786.8834683722166, "变形": 254.76094642922362, "翅片掉带": 467.8269772511413, "检测": 2575.2178428949774, "火焰焊": 8741.191461771685, "呛管": 0, "错、漏装": 1070.2174457168946 }
-        },
-        { name: "暖风", 
-         报废当月限额: 86792.18063934834, 报废金额: 38679.27671142816, 索赔: 0, 实际报废: 38679.27671142816, 产值: 2889190.8632179233, 当月报废率: 0.013387581001951513, 目标率: 0.01,
-         缺陷明细: { "前道": 21588.0493625533, "碰伤": 2326.517176058323, "来料": 44.610882000000004, "主与扁未焊合": 6701.179432861082, "钎焊": 3128.444925838813, "其它": 0, "变形": 124.14076300000002, "翅片掉带": 267.028239, "检测": 609.4159053722165, "火焰焊": 953.7459726861082, "呛管": 64.2321576861082, "错、漏装": 85.028426 }
-        }
+    // ---------- 原始数据集 (从excel内容严格提取) ----------
+    const productsData = [
+        { name: "冷凝器", limit: 85717.6949855559, scrapAmount: 49248.63793703393, claim: 6375.287025575467,
+          output: 4001289.340326936, actualScrap: 42873.35091145846, actualRate: 0.010714883944872473, target: 0.01,
+          reasons: {"前道":19370.12683540187,"碰伤":3201.664366726404,"来料":5901.960724575468,"主与扁未焊合":1558.261850726404,
+                    "钎焊":4797.022840575468,"其它":224.701729,"变形":3725.114854,"翅片掉带":294.234425575468,"检测":1380.9251733018718,
+                    "火焰焊":937.5333395754681,"呛管":0,"错漏装":314.67319899999995} },
+        { name: "油冷器", limit: 18338.81968002013, scrapAmount: 10761.439363031199, claim: 133.134486,
+          output: 1381164.7654936702, actualScrap: 10628.304877031198, actualRate: 0.0076951752191798195, target: 0.007,
+          reasons: {"前道":2199.8083680311997,"碰伤":4338.899589000001,"来料":133.134486,"主与扁未焊合":199.701729,
+                    "钎焊":586.593658,"其它":21832.641723197983,"变形":1318.8333310000003,"翅片掉带":736.7175050000001,
+                    "检测":673.691626,"火焰焊":282.790099,"呛管":0,"错漏装":66.567243} },
+        { name: "蒸发器", limit: 269740.08369759016, scrapAmount: 236349.60748457088, claim: 19300.031167145335,
+          output: 18475019.060029067, actualScrap: 217049.57631742556, actualRate: 0.011748273471988724, target: 0.01,
+          reasons: {"前道":93954.2415043477,"碰伤":16934.406758035835,"来料":22276.748527132728,"主与扁未焊合":19969.83626032007,
+                    "钎焊":27234.456777884337,"其它":2804.4385709999997,"变形":3048.3768739957977,"翅片掉带":2798.5936135810684,
+                    "检测":7255.565191991605,"火焰焊":8668.823487048443,"呛管":61.891302,"错漏装":12314.025465035842} },
+        { name: "水箱", limit: 60691.737006961484, scrapAmount: 44418.39369767006, claim: 627.768231,
+          output: 2787999.535470004, actualScrap: 43790.625466670055, actualRate: 0.015706826672511543, target: 0.012,
+          reasons: {"前道":37130.04572067,"碰伤":1172.174446,"来料":0,"主与扁未焊合":865.94704,
+                    "钎焊":98.117078,"其它":3069.1558546484,"变形":369.423564,"翅片掉带":143.56946,
+                    "检测":1488.2990019999997,"火焰焊":0,"呛管":0,"错漏装":346.37881600000003} },
+        { name: "内冷", limit: 77047.78393613009, scrapAmount: 69697.35503105648, claim: 6554.738156041094,
+          output: 4979668.624812634, actualScrap: 63142.61687501538, actualRate: 0.012680084084388487, target: 0.006,
+          reasons: {"前道":30832.562717997258,"碰伤":7626.5302210410955,"来料":6686.291208255707,"主与扁未焊合":3684.865951611869,
+                    "钎焊":4441.849828009129,"其它":2872.4126293722165,"变形":308.1162900365295,"翅片掉带":521.1823208584472,
+                    "检测":2575.2178428949774,"火焰焊":8794.54680537899,"呛管":0,"错漏装":1103.6806467168947} },
+        { name: "暖风", limit: 86792.18063934834, scrapAmount: 40908.37011215871, claim: 0,
+          output: 3054223.891447906, actualScrap: 40908.37011215871, actualRate: 0.013394031205998264, target: 0.01,
+          reasons: {"前道":23054.283438853305,"碰伤":2413.894019058323,"来料":44.610882000000004,"主与扁未焊合":7179.436280233299,
+                    "钎焊":3240.1413988971376,"其它":0,"变形":124.14076300000002,"翅片掉带":267.028239,
+                    "检测":609.4159053722165,"火焰焊":953.7459726861082,"呛管":64.2321576861082,"错漏装":85.028426} }
     ];
 
-    // 合计数据 (直接从合计行提取，但为了保证数据一致性，动态汇总)
-    const totalRow = {
-        产品类别: "合计",
-        报废当月限额: 433442.6162166469,
-        报废金额: 426018.67429770797,
-        索赔: 30863.24039521563,
-        实际报废: 395155.4339024924,
-        产值: 36408719.95745647,
-        当月报废率: 0.010853318500739133,
-        目标率: 0.0095
-    };
-    // 计算合计缺陷总值
-    function sumDefects(products) {
-        let sumMap = new Map();
-        let defectKeys = ["前道","碰伤","来料","主与扁未焊合","钎焊","其它","变形","翅片掉带","检测","火焰焊","呛管","错、漏装"];
-        defectKeys.forEach(k => sumMap.set(k, 0));
-        products.forEach(p => {
-            defectKeys.forEach(dk => {
-                if(p.缺陷明细[dk] !== undefined) sumMap.set(dk, sumMap.get(dk) + p.缺陷明细[dk]);
-            });
-        });
-        return Object.fromEntries(sumMap);
-    }
-    const totalDefects = sumDefects(products);
-    
-    // KPI 渲染
+    // 计算合计 (用于顶部KPI)
+    let totalLimit = 0, totalScrap = 0, totalClaim = 0, totalActual = 0, totalOutput = 0;
+    productsData.forEach(p => {
+        totalLimit += p.limit;
+        totalScrap += p.scrapAmount;
+        totalClaim += p.claim;
+        totalActual += p.actualScrap;
+        totalOutput += p.output;
+    });
+    const totalRate = totalActual / totalOutput;
+    const targetOverall = 0.0095;  // 合计目标0.0095
+
+    // 准备KPI渲染
+    const formatMoney = (val) => '¥' + val.toLocaleString('zh-CN', {minimumFractionDigits:2, maximumFractionDigits:2});
+    const formatPercent = (val) => (val * 100).toFixed(2) + '%';
+    const kpiData = [
+        { icon: "fa-chart-line", title: "实际报废总金额", value: formatMoney(totalActual), sub: "扣除索赔后净损失", color: "#dc2626" },
+        { icon: "fa-coins", title: "报废总额(毛)", value: formatMoney(totalScrap), sub: "含索赔前原值", color: "#f97316" },
+        { icon: "fa-percent", title: "整体报废率", value: formatPercent(totalRate), sub: `目标 ${formatPercent(targetOverall)}` , trend: totalRate > targetOverall ? '高于目标' : '低于目标', isBad: totalRate > targetOverall },
+        { icon: "fa-industry", title: "总产値", value: formatMoney(totalOutput), sub: "全车间产值贡献", color: "#2c6e9e" },
+        { icon: "fa-chart-simple", title: "总报废限额", value: formatMoney(totalLimit), sub: "当月限额", color: "#4b5563" },
+        { icon: "fa-hand-holding-usd", title: "索赔金额", value: formatMoney(totalClaim), sub: "索赔回收总额", color: "#059669" }
+    ];
+
     function renderKPI() {
-        const totalActualWaste = totalRow.实际报废;
-        const totalOutput = totalRow.产值;
-        const actualRate = (totalActualWaste / totalOutput * 100).toFixed(2);
-        const targetRate = (totalRow.目标率 * 100).toFixed(2);
-        const diffRate = (totalRow.当月报废率 - totalRow.目标率)*100;
-        const totalLimit = totalRow.报废当月限额;
-        const limitUsageRate = (totalActualWaste / totalLimit * 100).toFixed(1);
-        const kpis = [
-            { title: "总报废金额", value: `¥${(totalActualWaste/10000).toFixed(2)}W`, sub: `实际报废 ${totalActualWaste.toFixed(0)} 元`, icon: "fa-circle-dollar" },
-            { title: "总产值", value: `¥${(totalOutput/10000).toFixed(2)}W`, sub: `产值规模 ${(totalOutput/10000).toFixed(1)}万`, icon: "fa-chart-line" },
-            { title: "综合报废率", value: `${actualRate}%`, sub: `目标 ${targetRate}% | ${diffRate>0 ? '高于目标'+(diffRate.toFixed(2))+'pp' : '达标且优于目标'+(Math.abs(diffRate)).toFixed(2)+'pp'}`, icon: "fa-gauge-high", colorFlag: diffRate>0 ? 'trend-up' : 'trend-down' },
-            { title: "报废限额使用率", value: `${limitUsageRate}%`, sub: `限额 ¥${(totalLimit/10000).toFixed(2)}W | 剩余额度`, icon: "fa-chart-pie" }
-        ];
-        const container = document.getElementById("kpiContainer");
-        container.innerHTML = kpis.map(kp => `
+        const container = document.getElementById('kpiGrid');
+        container.innerHTML = kpiData.map(k => `
             <div class="kpi-card">
-                <div class="kpi-title"><i class="fas ${kp.icon}"></i> ${kp.title}</div>
-                <div class="kpi-value">${kp.value}</div>
-                <div class="kpi-sub ${kp.colorFlag || ''}"><i class="fas fa-info-circle"></i> ${kp.sub}</div>
+                <div class="kpi-title"><i class="fas ${k.icon}" style="color:${k.color || '#3b82f6'}"></i> ${k.title}</div>
+                <div class="kpi-value">${k.value}</div>
+                <div class="kpi-sub">${k.sub} ${k.trend ? `<span class="${k.isBad ? 'trend-up' : 'trend-down'}"><i class="fas ${k.isBad ? 'fa-arrow-up' : 'fa-arrow-down'}"></i> ${k.trend}</span>` : ''}</div>
             </div>
         `).join('');
     }
 
-    // 图表1: 产品报废金额(柱) + 实际报废率(折线)
-    function renderProductChart() {
-        const prodNames = products.map(p => p.name);
-        const wasteAmounts = products.map(p => p.实际报废);
-        const rateVals = products.map(p => (p.当月报废率 * 100).toFixed(2));
-        const targetRates = products.map(p => (p.目标率 * 100).toFixed(2));
-        const chart = echarts.init(document.getElementById("chart-product"));
+    // 渲染饼图: 各产品实际报废金额占比
+    function initPieChart() {
+        const chart = echarts.init(document.getElementById('pieChart'));
+        const pieData = productsData.map(p => ({ name: p.name, value: p.actualScrap }));
         chart.setOption({
-            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-            legend: { data: ['报废金额(元)', '实际报废率(%)', '目标报废率(%)'], left: 'left' },
-            xAxis: { type: 'category', data: prodNames, axisLabel: { rotate: 20, fontWeight:500 } },
-            yAxis: [{ type: 'value', name: '金额 (元)', nameLocation: 'middle', nameGap: 50 }, { type: 'value', name: '报废率 (%)', min: 0, max: 2.2 }],
-            series: [
-                { name: '报废金额(元)', type: 'bar', data: wasteAmounts, itemStyle: { borderRadius: [8,8,0,0], color: '#3b82f6' }, yAxisIndex: 0, label: { show: true, formatter: (p) => (p.value/1000).toFixed(0)+'k', position: 'top' } },
-                { name: '实际报废率(%)', type: 'line', smooth: true, data: rateVals, symbol: 'circle', lineStyle: { width: 3, color: '#f97316' }, yAxisIndex: 1, itemStyle: { color: '#ea580c' }, label: { show: true, formatter: '{c}%', position: 'top' } },
-                { name: '目标报废率(%)', type: 'line', data: targetRates, lineStyle: { width: 2, type: 'dashed', color: '#10b981' }, symbol: 'diamond', yAxisIndex: 1, label: { show: true } }
-            ]
+            tooltip: { trigger: 'item', formatter: '{b}: ¥{c} ({d}%)' },
+            legend: { orient: 'vertical', left: 'left', textStyle: { color: '#334155' } },
+            series: [{
+                type: 'pie', radius: '55%', center: ['50%', '55%'], data: pieData,
+                label: { show: true, formatter: '{b}', position: 'outside', color: '#1f2937' },
+                emphasis: { scale: true }, itemStyle: { borderRadius: 8, borderColor: '#fff', borderWidth: 2 }
+            }],
+            color: ['#3b82f6','#f97316','#10b981','#8b5cf6','#ef4444','#06b6d4']
         });
         window.addEventListener('resize', () => chart.resize());
     }
 
-    // 图表2: 目标VS实际对比条形图
-    function renderTargetCompare() {
-        const prodNames = products.map(p => p.name);
-        const actualRate = products.map(p => (p.当月报废率 * 100).toFixed(2));
-        const targetRate = products.map(p => (p.目标率 * 100).toFixed(2));
-        const chart = echarts.init(document.getElementById("chart-target"));
+    // 报废率 vs 目标 柱状图
+    function initBarTarget() {
+        const chart = echarts.init(document.getElementById('barTargetChart'));
+        const categories = productsData.map(p => p.name);
+        const actualRates = productsData.map(p => p.actualRate * 100);
+        const targets = productsData.map(p => p.target * 100);
         chart.setOption({
-            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-            legend: { data: ['实际报废率 %', '目标报废率 %'] },
-            grid: { containLabel: true, left: 50 },
-            xAxis: { type: 'value', name: '报废率 (%)' },
-            yAxis: { type: 'category', data: prodNames, axisLabel: { fontWeight:500 } },
+            tooltip: { trigger: 'axis', valueFormatter: (value) => value?.toFixed(2) + '%' },
+            legend: { data: ['实际报废率 (%)', '控制目标 (%)'], left: 'left' },
+            xAxis: { type: 'category', data: categories, axisLabel: { rotate: 20, fontWeight:500 } },
+            yAxis: { type: 'value', name: '报废率 (%)', axisLabel: { formatter: '{value}%' } },
             series: [
-                { name: '实际报废率 %', type: 'bar', data: actualRate, itemStyle: { borderRadius: [0, 6, 6, 0], color: '#ef4444' }, label: { show: true, position: 'right', formatter: '{c}%' } },
-                { name: '目标报废率 %', type: 'bar', data: targetRate, itemStyle: { borderRadius: [0, 6, 6, 0], color: '#6b7280' }, label: { show: true, position: 'right' } }
-            ]
+                { name: '实际报废率 (%)', type: 'bar', data: actualRates, itemStyle: { borderRadius: [6,6,0,0], color: '#e11d48' }, label: { show: true, position: 'top', formatter: '{c}%' } },
+                { name: '控制目标 (%)', type: 'line', data: targets, lineStyle: { width: 3, color: '#2c6e9e', type: 'dashed' }, symbol: 'circle', symbolSize: 8, itemStyle: { color: '#1e40af' } }
+            ],
+            grid: { containLabel: true, top: 40, bottom: 20 }
         });
+        window.addEventListener('resize', () => chart.resize());
     }
 
-    // 全车间缺陷金额 条形图 (水平较好展示)
-    function renderDefectChart() {
-        const defectNames = Object.keys(totalDefects);
-        const defectAmounts = Object.values(totalDefects);
-        const chart = echarts.init(document.getElementById("chart-defects"));
-        chart.setOption({
-            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: (params) => `${params[0].axisValue}: ¥${(params[0].value).toFixed(0)} 元` },
-            grid: { left: '12%', containLabel: true },
-            xAxis: { type: 'value', name: '报废金额 (元)', axisLabel: { formatter: (v) => (v/1000).toFixed(0)+'k' } },
-            yAxis: { type: 'category', data: defectNames, axisLabel: { fontSize: 11, fontWeight:500 }, name: '缺陷类型' },
-            series: [{
-                name: '报废金额', type: 'bar', data: defectAmounts, itemStyle: { borderRadius: [0, 6, 6, 0], color: '#8b5cf6', shadowColor: '#a78bfa' }, label: { show: true, position: 'right', formatter: (p) => (p.value/1000).toFixed(1)+'k' }
-            }]
-        });
-    }
-
-    // 构建详细表格 包括各产品线及缺陷列
-    function renderDetailTable() {
-        const defectKeys = ["前道","碰伤","来料","主与扁未焊合","钎焊","其它","变形","翅片掉带","检测","火焰焊","呛管","错、漏装"];
-        // thead
-        const theadRow = document.getElementById("tableHead");
-        let headerHtml = `<tr><th>产品线</th><th>实际报废(元)</th><th>产值(万元)</th><th>报废率</th><th>目标率</th>${defectKeys.map(d => `<th>${d}</th>`).join('')}</tr>`;
-        theadRow.innerHTML = headerHtml;
-        const tbody = document.getElementById("tableBody");
-        let bodyHtml = "";
-        products.forEach(prod => {
-            const wasteRate = (prod.当月报废率 * 100).toFixed(2)+"%";
-            const targetPct = (prod.目标率*100).toFixed(2)+"%";
-            let row = `<tr><td style="font-weight:700;">${prod.name}</td><td>${prod.实际报废.toFixed(0)}</td><td>${(prod.产值/10000).toFixed(1)}</td><td style="color:${prod.当月报废率>prod.目标率 ? '#dc2626' : '#10b981'}">${wasteRate}</td><td>${targetPct}</td>`;
-            defectKeys.forEach(dk => {
-                let val = prod.缺陷明细[dk] !== undefined ? prod.缺陷明细[dk] : 0;
-                row += `<td>${val.toFixed(0)}</td>`;
+    // 缺陷原因分布 (合并所有产品的原因金额，取前6大 + 其他)
+    function buildReasonAgg() {
+        const reasonMap = new Map();
+        productsData.forEach(p => {
+            Object.entries(p.reasons).forEach(([reason, amount]) => {
+                if (amount && amount > 0) {
+                    reasonMap.set(reason, (reasonMap.get(reason) || 0) + amount);
+                }
             });
-            row += `</tr>`;
-            bodyHtml += row;
         });
-        // 合计行添加
-        let totalWasteRate = (totalRow.当月报废率*100).toFixed(2)+"%";
-        let totalTarget = (totalRow.目标率*100).toFixed(2)+"%";
-        let sumDef = totalDefects;
-        let totalRowHtml = `<tr style="background:#f1f5f9; font-weight:800;"><td style="font-weight:800;">总计/平均</td><td>${totalRow.实际报废.toFixed(0)}</td><td>${(totalRow.产值/10000).toFixed(1)}</td><td>${totalWasteRate}</td><td>${totalTarget}</td>`;
-        defectKeys.forEach(dk => {
-            totalRowHtml += `<td>${(sumDef[dk] || 0).toFixed(0)}</td>`;
-        });
-        totalRowHtml += `</tr>`;
-        bodyHtml += totalRowHtml;
-        tbody.innerHTML = bodyHtml;
+        // 转为数组并排序
+        let sorted = Array.from(reasonMap.entries()).map(([name, val]) => ({ name, value: val }));
+        sorted.sort((a,b) => b.value - a.value);
+        const top6 = sorted.slice(0,6);
+        const otherSum = sorted.slice(6).reduce((sum, item) => sum + item.value, 0);
+        if (otherSum > 0) top6.push({ name: '其他原因', value: otherSum });
+        return top6;
     }
 
-    // 初始化所有
-    function init() {
-        renderKPI();
-        renderProductChart();
-        renderTargetCompare();
-        renderDefectChart();
-        renderDetailTable();
+    function initReasonChart() {
+        const chartDom = document.getElementById('reasonBarChart');
+        const chart = echarts.init(chartDom);
+        const data = buildReasonAgg();
+        chart.setOption({
+            tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, formatter: (params) => {
+                let val = params[0].value;
+                return `${params[0].axisValue}<br/>报废金额: ¥${val.toLocaleString('zh-CN', {minimumFractionDigits:2})}`;
+            } },
+            xAxis: { type: 'category', data: data.map(d => d.name), axisLabel: { rotate: 25, fontWeight:'bold', fontSize: 11 } },
+            yAxis: { type: 'value', name: '报废金额 (¥)', axisLabel: { formatter: (val) => '¥' + (val/1000).toFixed(0)+'k' } },
+            series: [{
+                name: '报废金额', type: 'bar', data: data.map(d => d.value),
+                itemStyle: { borderRadius: [6,6,0,0], color: '#f97316', shadowColor: 'rgba(0,0,0,0.1)' },
+                label: { show: true, position: 'top', formatter: (p) => '¥' + (p.value/1000).toFixed(1)+'k', fontSize: 10 }
+            }],
+            grid: { containLabel: true, top: 30, bottom: 40 }
+        });
+        window.addEventListener('resize', () => chart.resize());
     }
-    init();
+
+    // 填充表格数据 (详细)
+    function renderTable() {
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+        productsData.forEach(p => {
+            const row = document.createElement('tr');
+            const reasons = p.reasons;
+            row.innerHTML = `
+                <td><span class="product-badge">${p.name}</span></td>
+                <td>${p.limit.toFixed(2)}</td>
+                <td>${p.scrapAmount.toFixed(2)}</td>
+                <td>${p.claim.toFixed(2)}</td>
+                <td><strong>${p.actualScrap.toFixed(2)}</strong></td>
+                <td>${p.output.toFixed(2)}</td>
+                <td class="${p.actualRate > p.target ? 'trend-up' : 'trend-down'}" style="font-weight:600">${(p.actualRate*100).toFixed(3)}%</td>
+                <td>${(p.target*100).toFixed(2)}%</td>
+                <td>${(reasons["前道"] || 0).toFixed(2)}</td>
+                <td>${(reasons["碰伤"] || 0).toFixed(2)}</td>
+                <td>${(reasons["来料"] || 0).toFixed(2)}</td>
+                <td>${(reasons["主与扁未焊合"] || 0).toFixed(2)}</td>
+                <td>${(reasons["钎焊"] || 0).toFixed(2)}</td>
+                <td>${(reasons["其它"] || 0).toFixed(2)}</td>
+                <td>${(reasons["变形"] || 0).toFixed(2)}</td>
+                <td>${(reasons["翅片掉带"] || 0).toFixed(2)}</td>
+                <td>${(reasons["检测"] || 0).toFixed(2)}</td>
+                <td>${(reasons["火焰焊"] || 0).toFixed(2)}</td>
+                <td>${(reasons["呛管"] || 0).toFixed(2)}</td>
+                <td>${(reasons["错漏装"] || 0).toFixed(2)}</td>
+            `;
+            tbody.appendChild(row);
+        });
+        // 添加合计行 (美观)
+        const footerRow = document.createElement('tr');
+        footerRow.style.background = "#f1f5f9";
+        footerRow.style.fontWeight = "bold";
+        footerRow.innerHTML = `
+            <td><strong>合计 / 均值</strong></td>
+            <td><strong>${totalLimit.toFixed(2)}</strong></td>
+            <td><strong>${totalScrap.toFixed(2)}</strong></td>
+            <td><strong>${totalClaim.toFixed(2)}</strong></td>
+            <td><strong>${totalActual.toFixed(2)}</strong></td>
+            <td><strong>${totalOutput.toFixed(2)}</strong></td>
+            <td><strong>${(totalRate*100).toFixed(3)}%</strong></td>
+            <td><strong>0.95%</strong></td>
+            <td colspan="12">基于各产品缺陷原因汇总</td>
+        `;
+        tbody.appendChild(footerRow);
+    }
+
+    // 附加辅助图表: 额外为了更动态，使用echarts实例自适应
+    window.addEventListener('load', () => {
+        renderKPI();
+        initPieChart();
+        initBarTarget();
+        initReasonChart();
+        renderTable();
+        // 可增加resize监听统一优化
+        const allCharts = [echarts.getInstanceByDom(document.getElementById('pieChart')),
+                           echarts.getInstanceByDom(document.getElementById('barTargetChart')),
+                           echarts.getInstanceByDom(document.getElementById('reasonBarChart'))];
+        window.addEventListener('resize', () => {
+            allCharts.forEach(ch => ch && ch.resize());
+        });
+    });
 </script>
 </body>
 </html>
