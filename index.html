@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>HEX车间 · 报废根因追溯看板 | 2026年5月</title>
+    <title>HEX车间 · 报废根因追溯看板 | 2026年5月 数据更新</title>
     <!-- ECharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <!-- Font Awesome & Google Fonts -->
@@ -68,23 +68,18 @@
             color: #1d5b8e;
         }
 
-        /* ----- 新KPI卡片样式：完全匹配用户提供的卡片布局 ----- */
+        /* 全新KPI卡片样式 6列 */
         .kpi-grid-new {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 18px;
             margin-bottom: 32px;
         }
-        /* 响应式：中等屏幕自动换行 */
         @media (max-width: 1200px) {
-            .kpi-grid-new {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .kpi-grid-new { grid-template-columns: repeat(3, 1fr); }
         }
         @media (max-width: 700px) {
-            .kpi-grid-new {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .kpi-grid-new { grid-template-columns: repeat(2, 1fr); }
         }
         .kpi-card-new {
             background: white;
@@ -93,7 +88,6 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.03);
             transition: all 0.2s;
             border: 1px solid #e6edf4;
-            text-align: left;
         }
         .kpi-card-new:hover {
             transform: translateY(-3px);
@@ -129,22 +123,8 @@
             display: flex;
             justify-content: space-between;
         }
-        .trend-badge {
-            background: #fef2e0;
-            border-radius: 40px;
-            padding: 2px 10px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .trend-up {
-            color: #c0392b;
-        }
-        .trend-warning {
-            background: #fdedd7;
-            color: #e67e22;
-        }
 
-        /* 两列布局：缺陷排行榜 + 主要产品影响 */
+        /* 两列布局 */
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -158,7 +138,6 @@
             padding: 16px 18px 10px 18px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02);
             border: 1px solid #eaf0f6;
-            transition: all 0.2s;
         }
 
         .chart-header {
@@ -189,7 +168,7 @@
             height: 340px;
         }
 
-        /* 根因表格 + 详细归因 */
+        /* 表格样式 */
         .insight-section {
             background: white;
             border-radius: 28px;
@@ -275,12 +254,8 @@
         }
 
         @media (max-width: 880px) {
-            body {
-                padding: 20px 16px;
-            }
-            .two-columns {
-                grid-template-columns: 1fr;
-            }
+            body { padding: 20px 16px; }
+            .two-columns { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -289,15 +264,15 @@
     <div class="header">
         <div class="title-section">
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px; color:#2c7da0;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
-            <p><i class="far fa-calendar-alt"></i> 2026年5月数据 | 基于实际报废净额 ¥457,828.14 (含索赔后) &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 全归因深度分析</span></p>
+            <p><i class="far fa-calendar-alt"></i> 2026年5月数据 | 基于实际报废净额 ¥501,046.41 (含索赔后) &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 全归因深度分析 · 最新版</span></p>
         </div>
         <div style="background: #eef3fc; border-radius: 40px; padding: 6px 18px; font-weight: 500;"><i class="fas fa-microchip"></i> 动态看板 · 根因定位</div>
     </div>
 
-    <!-- ========= 全新KPI区域：完全匹配用户提供的卡片布局（报废总金额原始、索赔抵扣、实际报废净额、车间综合报废率、总产出、超出目标产品数） ========= -->
+    <!-- ========= 新版KPI卡片（报废总金额原始、索赔抵扣、实际报废净额、车间综合报废率、总产出、超出目标产品数） ========= -->
     <div class="kpi-grid-new" id="newKpiContainer"></div>
 
-    <!-- 双核心图表：缺陷金额排行 + 缺陷占比饼图 -->
+    <!-- 双核心图表 -->
     <div class="two-columns">
         <div class="chart-card">
             <div class="chart-header">
@@ -315,20 +290,18 @@
         </div>
     </div>
 
-    <!-- 根因详细表: 缺陷类别、总报废金额、占比、主要影响产品、相对强度 -->
+    <!-- 根因明细表 -->
     <div class="section-title">
         <i class="fas fa-table-list"></i> 报废根因深度明细 · 影响产品矩阵
     </div>
     <div class="insight-section">
         <table class="defect-table" id="defectTable">
-            <thead>
-                <tr><th>缺陷类别</th><th>总报废金额 (￥)</th><th>占报废总额比例</th><th>主要影响产品</th><th>相对强度</th></tr>
-            </thead>
+            <thead><tr><th>缺陷类别</th><th>总报废金额 (￥)</th><th>占报废总额比例</th><th>主要影响产品</th><th>相对强度</th></tr></thead>
             <tbody id="defectTableBody"></tbody>
         </table>
     </div>
     
-    <!-- 产品报废原因覆盖明细卡片 -->
+    <!-- 产品报废原因覆盖明细 -->
     <div class="section-title">
         <i class="fas fa-microscope"></i> 核心产品缺陷归因 · 金额热力摘要
     </div>
@@ -339,57 +312,70 @@
         </table>
     </div>
     <div class="footer-note">
-        <i class="fas fa-chart-line"></i> 数据基于2026年5月车间实际报废净额及原因归集 | 索赔后净额统计 | 相对强度 = 该缺陷在该产品中金额占车间该缺陷总额比例
+        <i class="fas fa-chart-line"></i> 基于2026年5月车间实际报废净额及原因归集 | 索赔后净额统计 | 相对强度 = 该缺陷在该产品中金额占车间该缺陷总额比例
     </div>
 </div>
 
 <script>
-    // ----- 基于真实数据构造 (完全来自Excel报废统计)
+    // ======================= 依据最新上传的Excel数据更新（2026年5月完整版） =======================
+    // 产品原始数据: 冷凝器、油冷器、蒸发器、水箱、内冷、暖风
+    // 数据字段与原始表格完全对齐: 报废金额（索赔前）、索赔、实际报废净额、产值、以及各缺陷金额
     const productsData = [
-        { name: "冷凝器", netScrap: 47632.39459968488, reasons: { "前道":21843.35035962827, "碰伤":3371.889423726404, "来料":6136.326757575468, "主与扁未焊合":2072.5580597264043, "钎焊":4870.440483575468, "其它":224.701729, "变形":3821.922268, "翅片掉带":294.234425575468, "检测":1380.9251733018718, "火焰焊":1330.143394575468, "呛管":0, "错漏装":992.3250969999999 } },
-        { name: "油冷器", netScrap: 11472.659994631198, reasons: { "前道":2307.9142146311997, "碰伤":5021.093146000001, "来料":133.134486, "主与扁未焊合":199.701729, "钎焊":586.593658, "其它":22620.777452019043, "变形":1372.8890450000004, "翅片掉带":736.7175050000001, "检测":673.691626, "火焰焊":282.790099, "呛管":0, "错漏装":66.567243 } },
-        { name: "蒸发器", netScrap: 236937.67432216438, reasons: { "前道":102172.67135528671, "碰伤":18186.523201446365, "来料":23996.769157364324, "主与扁未焊合":23973.893611075877, "钎焊":30764.696128758045, "其它":3102.1669909999996, "变形":3262.1398468779034, "翅片掉带":2798.5936135810684, "检测":7348.617757991606, "火焰焊":9111.450632812654, "呛管":61.891302, "错漏装":13659.702060328476 } },
-        { name: "水箱", netScrap: 48302.84106547007, reasons: { "前道":41015.86960347001, "碰伤":1240.671576, "来料":0, "主与扁未焊合":865.94704, "钎焊":98.117078, "其它":3566.762110470317, "变形":369.423564, "翅片掉带":218.64179, "检测":1575.2757599999998, "火焰焊":0, "呛管":0, "错漏装":444.495894 } },
-        { name: "内冷", netScrap: 68820.81731244772, reasons: { "前道":33922.95213281762, "碰伤":8154.981786255707, "来料":7985.087583255706, "主与扁未焊合":3738.221295219175, "钎焊":5455.6013565479425, "其它":2989.0348833722164, "变形":308.1162900365295, "翅片掉带":710.572152073059, "检测":2575.2178428949774, "火焰焊":9099.8033035936, "呛管":0, "错漏装":1103.6806467168947 } },
-        { name: "暖风", netScrap: 44661.75503097867, reasons: { "前道":25234.147115673317, "碰伤":2624.712842058323, "来料":81.31929400000001, "主与扁未焊合":7990.147157233299, "钎焊":3424.8414148971374, "其它":0, "变形":124.14076300000002, "翅片掉带":404.93226999999996, "检测":609.4159053722165, "火焰焊":992.8028016861082, "呛管":64.2321576861082, "错漏装":122.028426 } }
+        { 
+            name: "冷凝器", rawScrap: 59895.03899726222, claim: 6987.796015575468, netScrap: 52907.24298168675, output: 5145160.890730604,
+            reasons: { "前道":23679.463641903738, "碰伤":3451.657440726404, "来料":6514.469714575469, "主与扁未焊合":2072.5580597264043, "钎焊":5190.196059726404, "其它":224.701729, "变形":4046.89693, "翅片掉带":294.234425575468, "检测":1538.8152013018719, "火焰焊":1330.143394575468, "呛管":0, "错漏装":992.3250969999999 }
+        },
+        { 
+            name: "油冷器", rawScrap: 11882.8219578312, claim: 133.134486, netScrap: 11749.6874718312, output: 1610277.7080189867,
+            reasons: { "前道":2584.9416918312, "碰伤":5021.093146000001, "来料":133.134486, "主与扁未焊合":199.701729, "钎焊":586.593658, "其它":23124.859812019044, "变形":1372.8890450000004, "翅片掉带":736.7175050000001, "检测":673.691626, "火焰焊":282.790099, "呛管":0, "错漏装":66.567243 }
+        },
+        { 
+            name: "蒸发器", rawScrap: 281672.6752746176, claim: 22149.481355551674, netScrap: 259523.19391906593, output: 22565190.501041405,
+            reasons: { "前道":112062.40413656783, "碰伤":18832.296190974797, "来料":25126.198715539067, "主与扁未焊合":25496.514995779038, "钎焊":38036.213082562295, "其它":3102.1669909999996, "变形":3401.3072498779034, "翅片掉带":3140.5936135810684, "检测":7348.617757991606, "火焰焊":9735.754578223183, "呛管":61.891302, "错漏装":15306.023839503216 }
+        },
+        { 
+            name: "水箱", rawScrap: 53397.58261135007, claim: 627.768231, netScrap: 52769.81438035007, output: 3232442.7812559614,
+            reasons: { "前道":44576.20236435001, "碰伤":1436.905732, "来料":0, "主与扁未焊合":1403.16403, "钎焊":98.117078, "其它":3969.573316114152, "变形":369.423564, "翅片掉带":218.64179, "检测":1748.4651679999997, "火焰焊":0, "呛管":0, "错漏装":444.495894 }
+        },
+        { 
+            name: "内冷", rawScrap: 83694.3167613776, claim: 9043.805466255702, netScrap: 74650.5112951219, output: 6042495.864848009,
+            reasons: { "前道":37093.65141959223, "碰伤":8409.74273268493, "来料":9175.358518470315, "主与扁未焊合":4231.245981077622, "钎焊":6510.692457086755, "其它":3255.295695372216, "变形":308.1162900365295, "翅片掉带":710.572152073059, "检测":2616.5574148949772, "火焰焊":9511.770489022821, "呛管":0, "错漏装":1103.6806467168947 }
+        },
+        { 
+            name: "暖风", rawScrap: 49445.9621598092, claim: 0, netScrap: 49445.9621598092, output: 3688449.86904984,
+            reasons: { "前道":28263.18920807332, "碰伤":2757.910630058323, "来料":198.48978100000002, "主与扁未焊合":8889.071406663841, "钎焊":3694.4721628971374, "其它":0, "变形":148.30077000000003, "翅片掉带":404.93226999999996, "检测":609.4159053722165, "火焰焊":992.8028016861082, "呛管":64.2321576861082, "错漏装":167.849371 }
+        }
     ];
 
-    // 合计实际报废净额 (索赔后)
-    const totalNetScrap = 457828.14232537686;
-    // 原始报废总金额 (索赔前)
-    const totalRawScrap = 494072.28442937037;
-    const totalClaim = 36244.142103993494;
-    const totalOutput = 41865581.47245424;   // 产值原值
-    const totalOutputWan = (totalOutput / 10000).toFixed(2);
-    const comprehensiveRate = (totalNetScrap / totalOutput) * 100;  // 1.094% 
-    const targetRate = 0.95;  // 目标0.95%
-    const isOverTarget = comprehensiveRate > targetRate;
-    // 超出目标产品数量 (依据产品实际报废率 vs 目标率)
+    // 合计值 (依据最新excel合计行)
+    const totalRawScrap = 539988.397762248;       // 报废总金额原始
+    const totalClaim = 38941.985554382845;        // 索赔总额
+    const totalNetScrap = 501046.41220786504;     // 实际报废净额
+    const totalOutput = 46568053.458155885;       // 总产值
+    const totalActualRate = totalNetScrap / totalOutput;  // 0.010759445
+    const targetOverall = 0.0095;                 // 总目标0.95%
+    const overallRatePercent = (totalActualRate * 100).toFixed(3);
+    const isOverTarget = totalActualRate > targetOverall;
+
+    // 计算超出目标产品数 (基于各产品实际报废率 vs 目标率)
     const productTargetMap = { "冷凝器":0.01, "油冷器":0.007, "蒸发器":0.01, "水箱":0.012, "内冷":0.006, "暖风":0.01 };
     let overTargetCount = 0;
     productsData.forEach(p => {
-        let prodOutput = 0;
-        if(p.name === "冷凝器") prodOutput = 4481710.6313152425;
-        else if(p.name === "油冷器") prodOutput = 1474048.3908417716;
-        else if(p.name === "蒸发器") prodOutput = 20251424.187697902;
-        else if(p.name === "水箱") prodOutput = 3022072.9782506083;
-        else if(p.name === "内冷") prodOutput = 5413229.878538113;
-        else if(p.name === "暖风") prodOutput = 3366557.0158451297;
-        let actualRateProd = (p.netScrap / prodOutput)*100;
-        let targetRateProd = productTargetMap[p.name]*100;
+        let actualRateProd = p.netScrap / p.output;
+        let targetRateProd = productTargetMap[p.name];
         if(actualRateProd > targetRateProd) overTargetCount++;
     });
-    
-    // ===== 构造新版KPI (完全依照用户图片样式：报废总金额（原始）、索赔抵扣金额、实际报废净额、车间综合报废率、总产出、超出目标产品数) =====
+
+    // 新版KPI数据卡片
     const kpiNewData = [
         { icon: "fa-file-invoice-dollar", label: "报废总金额（原始）", value: "¥" + totalRawScrap.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "含未索赔部分" },
         { icon: "fa-hand-holding-usd", label: "索赔抵扣金额", value: "¥" + totalClaim.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "质量索赔收益" },
         { icon: "fa-chart-line", label: "实际报废净额", value: "¥" + totalNetScrap.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "最终承担成本" },
-        { icon: "fa-percent", label: "车间综合报废率", value: comprehensiveRate.toFixed(3) + "%", sub: `目标${targetRate}% ${isOverTarget ? '↑超出目标' : '↓达标'}` },
-        { icon: "fa-industry", label: "总产出（产值）", value: "¥" + totalOutputWan + "万", sub: `报废占比${((totalNetScrap/totalOutput)*100).toFixed(2)}%` },
+        { icon: "fa-percent", label: "车间综合报废率", value: overallRatePercent + "%", sub: `目标${(targetOverall*100).toFixed(2)}% ${isOverTarget ? '↑超出目标' : '↓达标'}` },
+        { icon: "fa-industry", label: "总产出（产值）", value: "¥" + (totalOutput / 10000).toFixed(2) + "万", sub: `报废占比${((totalNetScrap/totalOutput)*100).toFixed(2)}%` },
         { icon: "fa-triangle-exclamation", label: "超出目标产品数", value: `${overTargetCount} / 6`, sub: "需重点关注" }
     ];
-    
+
     const newKpiContainer = document.getElementById("newKpiContainer");
     function renderNewKPI() {
         newKpiContainer.innerHTML = "";
@@ -406,8 +392,8 @@
         });
     }
     renderNewKPI();
-    
-    // ----- 缺陷统计计算 (前道、碰伤、来料等12类) -----
+
+    // ========== 缺陷类别统计 (12类原因，基于最新产品数据累加) ==========
     const defectKeys = ["前道", "碰伤", "来料", "主与扁未焊合", "钎焊", "其它", "变形", "翅片掉带", "检测", "火焰焊", "呛管", "错漏装"];
     let defectAmounts = {};
     defectKeys.forEach(k => defectAmounts[k] = 0);
@@ -424,7 +410,7 @@
     }
     defectArray.sort((a,b) => b.amount - a.amount);
     
-    // 主要影响产品 + 相对强度
+    // 主要影响产品 & 相对强度
     const mainProductMap = {};
     const strengthMap = {};
     defectArray.forEach(def => {
@@ -464,7 +450,7 @@
         series: [{ type: 'pie', radius: '55%', data: pieData, label: { show: true, formatter: '{b}', position: 'outside' }, emphasis: { scale: true } }]
     });
     
-    // 根因明细表
+    // 渲染根因明细表
     const tbodyDefect = document.getElementById("defectTableBody");
     defectArray.forEach(def => {
         const row = document.createElement("tr");
@@ -480,7 +466,7 @@
         tbodyDefect.appendChild(row);
     });
     
-    // 产品原因表格：前三大报废原因
+    // 产品原因表格：前三大报废原因 (金额最高的三个缺陷)
     const prodReasonBody = document.getElementById("productReasonBody");
     productsData.forEach(prod => {
         let reasonsArr = [];
@@ -502,7 +488,10 @@
         prodReasonBody.appendChild(row);
     });
     
-    // 补充描述性脚注（类似原图片风格）
+    // 添加深度分析脚注 (动态TOP3缺陷说明)
+    const topDefect = defectArray[0];
+    const secondDefect = defectArray[1];
+    const thirdDefect = defectArray[2];
     const extraNote = document.createElement("div");
     extraNote.style.marginTop = "18px";
     extraNote.style.padding = "12px 16px";
@@ -510,8 +499,15 @@
     extraNote.style.borderRadius = "20px";
     extraNote.style.fontSize = "12px";
     extraNote.style.border = "1px solid #e2ecf5";
-    extraNote.innerHTML = `<i class="fas fa-chart-simple"></i> 报废根因深度分析：<strong>前道(¥${defectAmounts["前道"].toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${((defectAmounts["前道"]/totalNetScrap)*100).toFixed(2)}%)、钎焊(¥${defectAmounts["钎焊"].toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${((defectAmounts["钎焊"]/totalNetScrap)*100).toFixed(2)}%)、主与扁未焊合(¥${defectAmounts["主与扁未焊合"].toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${((defectAmounts["主与扁未焊合"]/totalNetScrap)*100).toFixed(2)}%)</strong>为主要TOP3缺陷，蒸发器在前道缺陷中占比高达81%，需强化芯体组装工序管控。`;
-    document.querySelector(".insight-section").after(extraNote);
+    extraNote.innerHTML = `<i class="fas fa-chart-simple"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷，蒸发器在前道/钎焊/主与扁未焊合缺陷中金额占比极高，需强化芯体组装及焊接工艺。`;
+    
+    // 将脚注添加到最后一个表格后面
+    const insightSections = document.querySelectorAll(".insight-section");
+    if(insightSections.length >= 2) {
+        insightSections[1].insertAdjacentElement('afterend', extraNote);
+    } else {
+        document.querySelector(".dashboard").appendChild(extraNote);
+    }
     
     // 响应式
     window.addEventListener('resize', () => {
@@ -519,7 +515,7 @@
         pieChart.resize();
     });
     
-    // 附加样式微调
+    // 样式优化
     const styleAdd = document.createElement('style');
     styleAdd.textContent = `
         .defect-table td:first-child, .defect-table th:first-child { background-color: #ffffff; position: sticky; left: 0; background: white; }
