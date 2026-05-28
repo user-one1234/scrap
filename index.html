@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>HEX车间 · 报废根因追溯看板 | 2026年5月 数据更新</title>
+    <title>HEX车间 · 报废根因看板 | 2026年5月 最新版</title>
     <!-- ECharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <!-- Font Awesome & Google Fonts -->
@@ -28,7 +28,6 @@
             margin: 0 auto;
         }
 
-        /* 头部 */
         .header {
             margin-bottom: 28px;
             display: flex;
@@ -68,7 +67,7 @@
             color: #1d5b8e;
         }
 
-        /* 全新KPI卡片样式 6列 */
+        /* KPI 6列卡片 */
         .kpi-grid-new {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -124,14 +123,13 @@
             justify-content: space-between;
         }
 
-        /* 两列布局 */
+        /* 双图表布局 */
         .two-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
             margin-bottom: 32px;
         }
-
         .chart-card {
             background: #ffffff;
             border-radius: 28px;
@@ -139,7 +137,6 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02);
             border: 1px solid #eaf0f6;
         }
-
         .chart-header {
             display: flex;
             justify-content: space-between;
@@ -148,13 +145,11 @@
             border-bottom: 2px solid #eef2f9;
             padding-bottom: 10px;
         }
-
         .chart-header h3 {
             font-size: 18px;
             font-weight: 700;
             color: #1b4a6e;
         }
-
         .chart-header span {
             font-size: 12px;
             background: #eef2fa;
@@ -162,7 +157,6 @@
             border-radius: 40px;
             font-weight: 500;
         }
-
         .chart-container {
             width: 100%;
             height: 340px;
@@ -172,12 +166,11 @@
         .insight-section {
             background: white;
             border-radius: 28px;
-            padding: 8px 0 8px 0;
+            padding: 8px 0;
             border: 1px solid #eaf0f6;
             margin-bottom: 24px;
             overflow-x: auto;
         }
-
         .section-title {
             font-size: 20px;
             font-weight: 700;
@@ -189,14 +182,12 @@
             align-items: center;
             gap: 12px;
         }
-
         .defect-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
             min-width: 900px;
         }
-
         .defect-table th {
             background: #f7fafd;
             padding: 14px 12px;
@@ -205,18 +196,15 @@
             border-bottom: 1px solid #e2eaf1;
             text-align: center;
         }
-
         .defect-table td {
             padding: 12px 10px;
             text-align: center;
             border-bottom: 1px solid #eff3f9;
             font-weight: 500;
         }
-
         .defect-table tr:hover td {
             background-color: #fafcff;
         }
-
         .product-badge {
             background: #eef3fc;
             border-radius: 20px;
@@ -226,7 +214,6 @@
             font-weight: 600;
             margin: 2px 4px;
         }
-
         .strength-bar {
             background: #e2e9f2;
             border-radius: 20px;
@@ -236,14 +223,12 @@
             margin: 0 auto;
             overflow: hidden;
         }
-
         .strength-fill {
             background: #e67e22;
             height: 8px;
             border-radius: 20px;
             width: 0%;
         }
-
         .footer-note {
             margin-top: 20px;
             text-align: center;
@@ -252,7 +237,6 @@
             border-top: 1px solid #dfe8f0;
             padding-top: 20px;
         }
-
         @media (max-width: 880px) {
             body { padding: 20px 16px; }
             .two-columns { grid-template-columns: 1fr; }
@@ -264,15 +248,15 @@
     <div class="header">
         <div class="title-section">
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px; color:#2c7da0;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
-            <p><i class="far fa-calendar-alt"></i> 2026年5月数据 | 基于实际报废净额 ¥501,046.41 (含索赔后) &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 全归因深度分析 · 最新版</span></p>
+            <p><i class="far fa-calendar-alt"></i> 2026年5月数据 | 基于实际报废净额 ¥46,490.65 (含索赔后) &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 全归因深度分析 · 最新版</span></p>
         </div>
         <div style="background: #eef3fc; border-radius: 40px; padding: 6px 18px; font-weight: 500;"><i class="fas fa-microchip"></i> 动态看板 · 根因定位</div>
     </div>
 
-    <!-- ========= 新版KPI卡片（报废总金额原始、索赔抵扣、实际报废净额、车间综合报废率、总产出、超出目标产品数） ========= -->
+    <!-- KPI卡片：报废总金额原始、索赔抵扣、实际报废净额、车间综合报废率、总产出、超出目标产品数 -->
     <div class="kpi-grid-new" id="newKpiContainer"></div>
 
-    <!-- 双核心图表 -->
+    <!-- 双图表 -->
     <div class="two-columns">
         <div class="chart-card">
             <div class="chart-header">
@@ -317,47 +301,46 @@
 </div>
 
 <script>
-    // ======================= 依据最新上传的Excel数据更新（2026年5月完整版） =======================
-    // 产品原始数据: 冷凝器、油冷器、蒸发器、水箱、内冷、暖风
-    // 数据字段与原始表格完全对齐: 报废金额（索赔前）、索赔、实际报废净额、产值、以及各缺陷金额
+    // ======================= 根据最新上传的Excel数据（2026年5月新版）更新 =======================
+    // 包含冷凝器、油冷器、蒸发器、水箱、内冷、暖风六大产品，所有金额均取自上传文件
     const productsData = [
         { 
-            name: "冷凝器", rawScrap: 59895.03899726222, claim: 6987.796015575468, netScrap: 52907.24298168675, output: 5145160.890730604,
-            reasons: { "前道":23679.463641903738, "碰伤":3451.657440726404, "来料":6514.469714575469, "主与扁未焊合":2072.5580597264043, "钎焊":5190.196059726404, "其它":224.701729, "变形":4046.89693, "翅片掉带":294.234425575468, "检测":1538.8152013018719, "火焰焊":1330.143394575468, "呛管":0, "错漏装":992.3250969999999 }
+            name: "冷凝器", rawScrap: 6897.594592007487, claim: 986.8126269999999, netScrap: 5910.781965007487, output: 441268.8003429878,
+            reasons: { "前道":3209.7509121018716, "碰伤":344.621381150936, "来料":459.55697999999995, "主与扁未焊合":0, "钎焊":229.47922899999998, "其它":100, "变形":0, "翅片掉带":223.128855, "检测":73.417643, "火焰焊":4, "呛管":0, "错漏装":120.816782575468 }
         },
         { 
-            name: "油冷器", rawScrap: 11882.8219578312, claim: 133.134486, netScrap: 11749.6874718312, output: 1610277.7080189867,
-            reasons: { "前道":2584.9416918312, "碰伤":5021.093146000001, "来料":133.134486, "主与扁未焊合":199.701729, "钎焊":586.593658, "其它":23124.859812019044, "变形":1372.8890450000004, "翅片掉带":736.7175050000001, "检测":673.691626, "火焰焊":282.790099, "呛管":0, "错漏装":66.567243 }
+            name: "油冷器", rawScrap: 952.6853808999999, claim: 0, netScrap: 952.6853808999999, output: 111312.91609177212,
+            reasons: { "前道":187.01295090000002, "碰伤":199.701729, "来料":0, "主与扁未焊合":0, "钎焊":0, "其它":375.69166, "变形":0, "翅片掉带":465.970701, "检测":0, "火焰焊":0, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "蒸发器", rawScrap: 281672.6752746176, claim: 22149.481355551674, netScrap: 259523.19391906593, output: 22565190.501041405,
-            reasons: { "前道":112062.40413656783, "碰伤":18832.296190974797, "来料":25126.198715539067, "主与扁未焊合":25496.514995779038, "钎焊":38036.213082562295, "其它":3102.1669909999996, "变形":3401.3072498779034, "翅片掉带":3140.5936135810684, "检测":7348.617757991606, "火焰焊":9735.754578223183, "呛管":61.891302, "错漏装":15306.023839503216 }
+            name: "蒸发器", rawScrap: 20272.92751251899, claim: 860.6592698821058, netScrap: 19412.268242636885, output: 1625581.9576515344,
+            reasons: { "前道":11629.410375527383, "碰伤":1574.8232989389521, "来料":860.6592698821058, "主与扁未焊合":1288.2429326463175, "钎焊":2242.4623725852693, "其它":98.117078, "变形":78.8135728821058, "翅片掉带":342, "检测":0, "火焰焊":980.3288288821059, "呛管":0, "错漏装":900.4952011747407 }
         },
         { 
-            name: "水箱", rawScrap: 53397.58261135007, claim: 627.768231, netScrap: 52769.81438035007, output: 3232442.7812559614,
-            reasons: { "前道":44576.20236435001, "碰伤":1436.905732, "来料":0, "主与扁未焊合":1403.16403, "钎焊":98.117078, "其它":3969.573316114152, "变形":369.423564, "翅片掉带":218.64179, "检测":1748.4651679999997, "火焰焊":0, "呛管":0, "错漏装":444.495894 }
+            name: "水箱", rawScrap: 7045.639070989999, claim: 0, netScrap: 7045.639070989999, output: 292133.2509205791,
+            reasons: { "前道":5670.040660989999, "碰伤":509.192012, "来料":0, "主与扁未焊合":384.14466, "钎焊":0, "其它":170.0660308219177, "变形":0, "翅片掉带":75.07233, "检测":309.07232999999997, "火焰焊":0, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "内冷", rawScrap: 83694.3167613776, claim: 9043.805466255702, netScrap: 74650.5112951219, output: 6042495.864848009,
-            reasons: { "前道":37093.65141959223, "碰伤":8409.74273268493, "来料":9175.358518470315, "主与扁未焊合":4231.245981077622, "钎焊":6510.692457086755, "其它":3255.295695372216, "变形":308.1162900365295, "翅片掉带":710.572152073059, "检测":2616.5574148949772, "火焰焊":9511.770489022821, "呛管":0, "错漏装":1103.6806467168947 }
+            name: "内冷", rawScrap: 8558.012388876483, claim: 1466.3280696073061, netScrap: 7091.684319269177, output: 464831.753506849,
+            reasons: { "前道":4437.458497301142, "碰伤":551.0727162146118, "来料":1466.3280696073061, "主与扁未焊合":305.25649821461184, "钎焊":638.6706314292236, "其它":159.763017, "变形":53.3553436073059, "翅片掉带":269.8872916073059, "检测":53.3553436073059, "火焰焊":612.5619664657531, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "暖风", rawScrap: 49445.9621598092, claim: 0, netScrap: 49445.9621598092, output: 3688449.86904984,
-            reasons: { "前道":28263.18920807332, "碰伤":2757.910630058323, "来料":198.48978100000002, "主与扁未焊合":8889.071406663841, "钎焊":3694.4721628971374, "其它":0, "变形":148.30077000000003, "翅片掉带":404.93226999999996, "检测":609.4159053722165, "火焰焊":992.8028016861082, "呛管":64.2321576861082, "错漏装":167.849371 }
+            name: "暖风", rawScrap: 6077.58780908384, claim: 0, netScrap: 6077.58780908384, output: 308465.44785679155,
+            reasons: { "前道":3933.5952444200007, "碰伤":64.092373, "来料":0, "主与扁未焊合":945.4524926861083, "钎焊":632.7145229777312, "其它":0, "变形":24.160007, "翅片掉带":21.820749, "检测":0, "火焰焊":295.98940300000004, "呛管":0, "错漏装":0 }
         }
     ];
 
-    // 合计值 (依据最新excel合计行)
-    const totalRawScrap = 539988.397762248;       // 报废总金额原始
-    const totalClaim = 38941.985554382845;        // 索赔总额
-    const totalNetScrap = 501046.41220786504;     // 实际报废净额
-    const totalOutput = 46568053.458155885;       // 总产值
-    const totalActualRate = totalNetScrap / totalOutput;  // 0.010759445
-    const targetOverall = 0.0095;                 // 总目标0.95%
+    // 合计值（取自Excel合计行，完全匹配上传数据）
+    const totalRawScrap = 49804.4467543768;         // 报废总金额原始
+    const totalClaim = 3313.799966489412;           // 索赔总额
+    const totalNetScrap = 46490.64678788738;        // 实际报废净额
+    const totalOutput = 3567953.539007566;          // 总产值
+    const totalActualRate = totalNetScrap / totalOutput;  // 0.013030059
+    const targetOverall = 0.0095;                   // 总目标0.95%
     const overallRatePercent = (totalActualRate * 100).toFixed(3);
     const isOverTarget = totalActualRate > targetOverall;
 
-    // 计算超出目标产品数 (基于各产品实际报废率 vs 目标率)
+    // 计算各产品实际报废率及超出目标数量
     const productTargetMap = { "冷凝器":0.01, "油冷器":0.007, "蒸发器":0.01, "水箱":0.012, "内冷":0.006, "暖风":0.01 };
     let overTargetCount = 0;
     productsData.forEach(p => {
@@ -366,7 +349,7 @@
         if(actualRateProd > targetRateProd) overTargetCount++;
     });
 
-    // 新版KPI数据卡片
+    // 新版KPI数据（六卡片）
     const kpiNewData = [
         { icon: "fa-file-invoice-dollar", label: "报废总金额（原始）", value: "¥" + totalRawScrap.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "含未索赔部分" },
         { icon: "fa-hand-holding-usd", label: "索赔抵扣金额", value: "¥" + totalClaim.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "质量索赔收益" },
@@ -450,7 +433,7 @@
         series: [{ type: 'pie', radius: '55%', data: pieData, label: { show: true, formatter: '{b}', position: 'outside' }, emphasis: { scale: true } }]
     });
     
-    // 渲染根因明细表
+    // 根因明细表
     const tbodyDefect = document.getElementById("defectTableBody");
     defectArray.forEach(def => {
         const row = document.createElement("tr");
@@ -488,7 +471,7 @@
         prodReasonBody.appendChild(row);
     });
     
-    // 添加深度分析脚注 (动态TOP3缺陷说明)
+    // 动态分析脚注 (TOP3缺陷汇总)
     const topDefect = defectArray[0];
     const secondDefect = defectArray[1];
     const thirdDefect = defectArray[2];
@@ -499,9 +482,8 @@
     extraNote.style.borderRadius = "20px";
     extraNote.style.fontSize = "12px";
     extraNote.style.border = "1px solid #e2ecf5";
-    extraNote.innerHTML = `<i class="fas fa-chart-simple"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷，蒸发器在前道/钎焊/主与扁未焊合缺陷中金额占比极高，需强化芯体组装及焊接工艺。`;
+    extraNote.innerHTML = `<i class="fas fa-chart-simple"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷，蒸发器在前道、主与扁未焊合、钎焊等缺陷中金额占比极高，需重点关注芯体组装及焊接工序。`;
     
-    // 将脚注添加到最后一个表格后面
     const insightSections = document.querySelectorAll(".insight-section");
     if(insightSections.length >= 2) {
         insightSections[1].insertAdjacentElement('afterend', extraNote);
@@ -509,13 +491,13 @@
         document.querySelector(".dashboard").appendChild(extraNote);
     }
     
-    // 响应式
+    // 响应式调整
     window.addEventListener('resize', () => {
         rankChart.resize();
         pieChart.resize();
     });
     
-    // 样式优化
+    // 附加样式微调
     const styleAdd = document.createElement('style');
     styleAdd.textContent = `
         .defect-table td:first-child, .defect-table th:first-child { background-color: #ffffff; position: sticky; left: 0; background: white; }
