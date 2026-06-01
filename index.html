@@ -196,7 +196,7 @@
     <div class="header">
         <div class="title-section">
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
-            <p><i class="far fa-calendar-alt"></i> 2026年6月数据 | 实际报废净额 ¥43,386.04 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率独立展现</span></p>
+            <p><i class="far fa-calendar-alt"></i> 2026年6月数据 | 实际报废净额 ¥131,963.95 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
         </div>
         <div style="background: #eef3fc; border-radius: 40px; padding: 6px 18px; font-weight: 500;"><i class="fas fa-microchip"></i> 动态看板 · 根因定位</div>
     </div>
@@ -209,7 +209,7 @@
         <div class="chart-card">
             <div class="chart-header">
                 <h3><i class="fas fa-chart-column"></i> 各芯体（产品）报废率对比</h3>
-                <span>实际 vs 目标 (%)</span>
+                <span>实际 vs 目标 (%) | 数据保留两位小数</span>
             </div>
             <div id="chart-product-rate" class="chart-container"></div>
         </div>
@@ -252,42 +252,41 @@
 
 <script>
     // ======================= 2026年6月最新数据 =======================
-    // 依据用户提供的6月报表数据录入（冷凝器、油冷器、蒸发器、水箱、内冷、暖风）
-    // 实际报废金额（netScrap）来自上传表格，保证准确性
+    // 产品数据：冷凝器、油冷器、蒸发器、水箱、内冷、暖风（基于最新上传Excel，报废净额合计131,963.95）
     const productsData = [
         { 
-            name: "冷凝器", rawScrap: 6897.594592007487, claim: 986.8126269999999, netScrap: 5910.781965007487, output: 441268.8003429878,
-            reasons: { "前道":3209.7509121018716, "碰伤":344.621381150936, "来料":459.55697999999995, "主与扁未焊合":0, "钎焊":229.47922899999998, "其它":100, "变形":0, "翅片掉带":223.128855, "检测":73.417643, "火焰焊":4, "呛管":0, "错漏装":120.816782575468 }
+            name: "冷凝器", rawScrap: 23172.007355498878, claim: 1778.090267575468, netScrap: 21393.917087923408, output: 1234910.016493847,
+            reasons: { "前道":7675.299876178276, "碰伤":2188.821513452808, "来料":1250.834620575468, "主与扁未焊合":542.248393150936, "钎焊":1960.7635718773402, "其它":100, "变形":2399.440991481084, "翅片掉带":223.128855, "检测":454.16504699999996, "火焰焊":4, "呛管":0, "错漏装":857.3363087264039 }
         },
         { 
-            name: "油冷器", rawScrap: 952.6853808999999, claim: 0, netScrap: 952.6853808999999, output: 111312.91609177212,
-            reasons: { "前道":187.01295090000002, "碰伤":199.701729, "来料":0, "主与扁未焊合":0, "钎焊":0, "其它":375.69166, "变形":0, "翅片掉带":465.970701, "检测":0, "火焰焊":0, "呛管":0, "错漏装":0 }
+            name: "油冷器", rawScrap: 2789.9912767703995, claim: 0, netScrap: 2789.9912767703995, output: 297817.3384177214,
+            reasons: { "前道":717.9970447704, "碰伤":732.2396729999999, "来料":0, "主与扁未焊合":0, "钎焊":0, "其它":937.7651600000002, "变形":599.105187, "翅片掉带":465.970701, "检测":174.678671, "火焰焊":0, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "蒸发器", rawScrap: 20272.92751251899, claim: 860.6592698821058, netScrap: 19412.268242636885, output: 1625581.9576515344,
-            reasons: { "前道":11629.410375527383, "碰伤":1574.8232989389521, "来料":860.6592698821058, "主与扁未焊合":1288.2429326463175, "钎焊":2242.4623725852693, "其它":98.117078, "变形":78.8135728821058, "翅片掉带":342, "检测":0, "火焰焊":980.3288288821059, "呛管":0, "错漏装":900.4952011747407 }
+            name: "蒸发器", rawScrap: 56582.176792605394, claim: 4615.601929698962, netScrap: 51966.57486290643, output: 4832817.551837304,
+            reasons: { "前道":28415.573863582154, "碰伤":3461.4874656421152, "来料":4659.418401698961, "主与扁未焊合":3503.0610632884327, "钎焊":6271.655924109492, "其它":271.306486, "变形":980.0456888821058, "翅片掉带":342, "检测":3498.5686122315865, "火焰焊":1964.0532815284232, "呛管":0, "错漏装":2548.5473316421158 }
         },
         { 
-            name: "水箱", rawScrap: 7045.639070989999, claim: 0, netScrap: 7045.639070989999, output: 292133.2509205791,
-            reasons: { "前道":5670.040660989999, "碰伤":509.192012, "来料":0, "主与扁未焊合":384.14466, "钎焊":0, "其它":170.0660308219177, "变形":0, "翅片掉带":75.07233, "检测":309.07232999999997, "火焰焊":0, "呛管":0, "错漏装":0 }
+            name: "水箱", rawScrap: 21171.483445460006, claim: 0, netScrap: 21171.483445460006, output: 827299.3560844316,
+            reasons: { "前道":15975.972085459996, "碰伤":1080.7878179999998, "来料":0, "主与扁未焊合":1946.612972, "钎焊":473.47872799999993, "其它":742.0111488219177, "变形":392.468312, "翅片掉带":75.07233, "检测":955.7847139999999, "火焰焊":0, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "内冷", rawScrap: 8558.012388876483, claim: 1466.3280696073061, netScrap: 7091.684319269177, output: 464831.753506849,
-            reasons: { "前道":4437.458497301142, "碰伤":551.0727162146118, "来料":1466.3280696073061, "主与扁未焊合":305.25649821461184, "钎焊":638.6706314292236, "其它":159.763017, "变形":53.3553436073059, "翅片掉带":269.8872916073059, "检测":53.3553436073059, "火焰焊":612.5619664657531, "呛管":0, "错漏装":0 }
+            name: "内冷", rawScrap: 20969.19275522985, claim: 3093.6400500365294, netScrap: 17875.55270519332, output: 1351973.7194327044,
+            reasons: { "前道":9957.259208111138, "碰伤":1119.2422098584473, "来料":3093.6400500365294, "主与扁未焊合":503.80230921461185, "钎焊":1775.8808359315062, "其它":667.3136783722164, "变形":106.7106872146118, "翅片掉带":1017.9150216073058, "检测":1133.1284766438355, "火焰焊":1519.6028077899534, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "暖风", rawScrap: 6077.58780908384, claim: 0, netScrap: 6077.58780908384, output: 308465.44785679155,
-            reasons: { "前道":3933.5952444200007, "碰伤":64.092373, "来料":0, "主与扁未焊合":945.4524926861083, "钎焊":632.7145229777312, "其它":0, "变形":24.160007, "翅片掉带":21.820749, "检测":0, "火焰焊":295.98940300000004, "呛管":0, "错漏装":0 }
+            name: "暖风", rawScrap: 16766.431719649856, claim: 0, netScrap: 16766.431719649856, output: 904890.3604031737,
+            reasons: { "前道":9174.345213716653, "碰伤":394.445276, "来料":0, "主与扁未焊合":4198.245808722163, "钎焊":1304.8724264665968, "其它":0, "变形":75.160203, "翅片掉带":21.820749, "检测":213.7843293722164, "火焰焊":677.387206, "呛管":0, "错漏装":39.056829 }
         }
     ];
 
-    // 合计值（精确取自6月汇总数据）
-    const totalRawScrap = 49804.4467543768;      // 报废总金额原始
-    const totalClaim = 3313.799966489412;        // 索赔总额
-    const totalNetScrap = 46490.64678788738;     // 实际报废净额 (注：此处展示为46,490.65，与看板标题金额对应)
-    const totalOutput = 3567953.539007566;       // 总产值
-    const totalActualRate = totalNetScrap / totalOutput;  // 0.01303006
-    const targetOverall = 0.0095;                // 总目标0.95%
+    // 合计值（取自6月合计行，精准匹配）
+    const totalRawScrap = 141451.28334521438;     // 报废总金额原始
+    const totalClaim = 9487.332247310958;         // 索赔总额
+    const totalNetScrap = 131963.95109790342;     // 实际报废净额
+    const totalOutput = 10394679.176936103;       // 总产值
+    const totalActualRate = totalNetScrap / totalOutput;  // 0.01269534
+    const targetOverall = 0.0095;                 // 总目标0.95%
     const overallRatePercent = (totalActualRate * 100).toFixed(3);
     const isOverTarget = totalActualRate > targetOverall;
 
@@ -323,19 +322,32 @@
     }
     renderKPI();
 
-    // ========== 图表1: 各芯体报废率柱状图（实际 vs 目标） ==========
+    // ========== 图表1: 各芯体报废率柱状图（实际 vs 目标），数值保留两位小数 ==========
     const prodNames = productsData.map(p => p.name);
-    const actualRates = productsData.map(p => (p.netScrap / p.output) * 100);
-    const targetRates = prodNames.map(name => productTargetMap[name] * 100);
+    // 计算实际报废率并保留两位小数（百分比形式）
+    const actualRatesRaw = productsData.map(p => (p.netScrap / p.output) * 100);
+    const actualRates = actualRatesRaw.map(v => parseFloat(v.toFixed(2)));
+    const targetRatesRaw = prodNames.map(name => productTargetMap[name] * 100);
+    const targetRates = targetRatesRaw.map(v => parseFloat(v.toFixed(2)));
+    
     const rateChart = echarts.init(document.getElementById("chart-product-rate"));
     rateChart.setOption({
-        tooltip: { trigger: 'axis', valueFormatter: (value) => value.toFixed(3) + '%' },
+        tooltip: { trigger: 'axis', valueFormatter: (value) => value.toFixed(2) + '%' },
         legend: { data: ['实际报废率 (%)', '目标控制率 (%)'], left: 'left' },
         xAxis: { type: 'category', data: prodNames, axisLabel: { rotate: 20, fontWeight: 500 } },
         yAxis: { type: 'value', name: '报废率 (%)', axisLabel: { formatter: '{value}%' } },
         series: [
-            { name: '实际报废率 (%)', type: 'bar', data: actualRates, itemStyle: { borderRadius: [6,6,0,0], color: '#4682b4' }, label: { show: true, position: 'top', formatter: '{c}%' } },
-            { name: '目标控制率 (%)', type: 'line', data: targetRates, lineStyle: { width: 2, color: '#f4a261', type: 'dashed' }, symbol: 'circle', symbolSize: 8, itemStyle: { color: '#e76f51' }, label: { show: true, position: 'top', formatter: '{c}%' } }
+            { 
+                name: '实际报废率 (%)', type: 'bar', data: actualRates, 
+                itemStyle: { borderRadius: [6,6,0,0], color: '#4682b4' }, 
+                label: { show: true, position: 'top', formatter: (params) => params.value.toFixed(2) + '%' } 
+            },
+            { 
+                name: '目标控制率 (%)', type: 'line', data: targetRates, 
+                lineStyle: { width: 2, color: '#f4a261', type: 'dashed' }, 
+                symbol: 'circle', symbolSize: 8, itemStyle: { color: '#e76f51' }, 
+                label: { show: true, position: 'top', formatter: (params) => params.value.toFixed(2) + '%' } 
+            }
         ]
     });
 
