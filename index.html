@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>HEX车间 · 报废根因看板 | 深海蓝背景</title>
+    <title>HEX车间 · 报废根因看板 | 2026年7月 深蓝背景</title>
     <!-- ECharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <!-- Font Awesome & Google Fonts -->
@@ -16,7 +16,7 @@
             box-sizing: border-box;
         }
         body {
-            background: #1a3a5c; /* 更深沉的蓝色背景 */
+            background: #1a3a5c;
             font-family: 'Inter', sans-serif;
             padding: 32px 28px;
             color: #1a2c3e;
@@ -60,7 +60,7 @@
             font-weight: 600;
             color: #0b3a66;
         }
-        /* KPI 6卡片 - 蓝色主题 */
+        /* KPI 6卡片 */
         .kpi-grid-new {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -202,9 +202,9 @@
     <div class="header">
         <div class="title-section">
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px; color:#4a9af0;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
-            <p><i class="far fa-calendar-alt"></i> 2026年7月数据 | 实际报废净额 ¥472,782.15 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
+            <p><i class="far fa-calendar-alt"></i> 2026年7月数据 | 实际报废净额 ¥500,177.56 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
         </div>
-        <div style="background: #ffffffcc; border-radius: 40px; padding: 6px 18px; font-weight: 500; color:#0b3a66;"><i class="fas fa-microchip"></i> 动态看板 · 深海蓝背景</div>
+        <div style="background: #ffffffcc; border-radius: 40px; padding: 6px 18px; font-weight: 500; color:#0b3a66;"><i class="fas fa-microchip"></i> 动态看板 · 深蓝背景</div>
     </div>
 
     <!-- KPI卡片区 -->
@@ -257,38 +257,39 @@
 </div>
 
 <script>
-    // ======================= 2026年7月最新数据（同最新） =======================
+    // ======================= 2026年7月最新数据（基于最新上传Excel） =======================
     const productsData = [
         { 
-            name: "冷凝器", rawScrap: 74295.43993674344, claim: 5216.619645681085, netScrap: 69078.82029106235, output: 5737684.44976721,
-            reasons: { "前道":35958.68371042341, "碰伤":7082.911506292318, "来料":4761.900116481084, "主与扁未焊合":1665.09514087734, "钎焊":3421.2695910565526, "其它":1090.829032, "变形":7465.209498141382, "翅片掉带":1687.8976081509359, "检测":2432.334490330148, "火焰焊":1704.956467452808, "呛管":0, "错漏装":747.630143150936 }
+            name: "冷凝器", rawScrap: 80118.87861112258, claim: 5290.037288681085, netScrap: 74828.8413224415, output: 5994139.213720591,
+            reasons: { "前道":37569.85432377434, "碰伤":8175.761426169659, "来料":5202.405974481084, "主与扁未焊合":1665.09514087734, "钎焊":5109.875380056553, "其它":1090.829032, "变形":7706.843063292318, "翅片掉带":1908.1505371509359, "检测":2432.334490330148, "火焰焊":1704.956467452808, "呛管":0, "错漏装":747.630143150936 }
         },
         { 
-            name: "油冷器", rawScrap: 10060.273870850402, claim: 0, netScrap: 10060.273870850402, output: 848337.1115126578,
-            reasons: { "前道":4476.132738850402, "碰伤":1340.8610939999999, "来料":0, "主与扁未焊合":0, "钎焊":1478.7536969999999, "其它":1255.0313875284232, "变形":133.134486, "翅片掉带":1139.573326, "检测":332.83621500000004, "火焰焊":68.153282, "呛管":0, "错漏装":0 }
+            name: "油冷器", rawScrap: 10245.325919650402, claim: 68.153282, netScrap: 10177.172637650403, output: 908785.1851518983,
+            reasons: { "前道":4593.031505650402, "碰伤":1340.8610939999999, "来料":68.153282, "主与扁未焊合":0, "钎焊":1478.7536969999999, "其它":1255.0313875284232, "变形":133.134486, "翅片掉带":1139.573326, "检测":332.83621500000004, "火焰焊":68.153282, "呛管":0, "错漏装":0 }
         },
         { 
-            name: "蒸发器", rawScrap: 202565.5376298365, claim: 27109.77962625482, netScrap: 175455.75800358166, output: 12269656.043228334,
-            reasons: { "前道":66722.90707996706, "碰伤":16019.299613040044, "来料":27388.98895825482, "主与扁未焊合":15197.286184284238, "钎焊":28587.751549225417, "其它":20313.061606999996, "变形":1432.957531938952, "翅片掉带":210.2629888821058, "检测":6787.664022812661, "火焰焊":11887.511948625313, "呛管":394.067864410529, "错漏装":25207.525037867537 }
+            name: "蒸发器", rawScrap: 211826.44025688292, claim: 27476.88863225482, netScrap: 184349.5516246281, output: 12897760.812312275,
+            reasons: { "前道":69180.65908113548, "碰伤":16276.926758804255, "来料":27756.097964254823, "主与扁未焊合":17231.531144284236, "钎焊":30849.55434787174, "其它":21124.398443, "变形":1580.7174479389516, "翅片掉带":210.2629888821058, "检测":6817.664022812661, "火焰焊":12521.016017625314, "呛管":394.067864410529, "错漏装":25411.678466631747 }
         },
         { 
-            name: "水箱", rawScrap: 94206.91842838001, claim: 0, netScrap: 94206.91842838001, output: 2147295.7960687242,
-            reasons: { "前道":62158.468597380015, "碰伤":3817.843744, "来料":0, "主与扁未焊合":2740.7118199999995, "钎焊":150.14466, "其它":4208.894168968035, "变形":1367.732377, "翅片掉带":852.496241, "检测":888.3546739999998, "火焰焊":225.710172, "呛管":0, "错漏装":1691.5945359999998 }
+            name: "水箱", rawScrap: 98992.99027420001, claim: 0, netScrap: 98992.99027420001, output: 2262639.4003322227,
+            reasons: { "前道":65276.56665420002, "碰伤":3817.843744, "来料":0, "主与扁未焊合":2740.7118199999995, "钎焊":150.14466, "其它":4621.233740968035, "变形":1743.094027, "翅片掉带":889.4237840000001, "检测":925.2822169999998, "火焰焊":225.710172, "呛管":0, "错漏装":2099.014753 }
         },
         { 
-            name: "内冷", rawScrap: 76137.19099793896, claim: 23590.48680476255, netScrap: 52546.70419317641, output: 5578350.794613386,
-            reasons: { "前道":26625.11503096649, "碰伤":5717.977562506844, "来料":23590.48680476255, "主与扁未焊合":3881.7143151872133, "钎焊":4296.796505470317, "其它":9238.548746399792, "变形":531.7801440365294, "翅片掉带":1630.6272504292235, "检测":2615.0418672511405, "火焰焊":2647.77156936073, "呛管":0, "错漏装":141.729175 }
+            name: "内冷", rawScrap: 80803.62683468356, claim: 24177.395584442915, netScrap: 56626.23125024064, output: 5824658.8021818455,
+            reasons: { "前道":28682.596415957632, "碰伤":5800.656706506844, "来料":24210.858785442913, "主与扁未焊合":3947.896252187213, "钎焊":4609.863017899541, "其它":9905.580804830335, "变形":585.1354876438353, "翅片掉带":1630.6272504292235, "检测":2615.0418672511405, "火焰焊":3708.7315313972595, "呛管":0, "错漏装":141.729175 }
         },
         { 
-            name: "暖风", rawScrap: 71457.67887060427, claim: 24.000196, netScrap: 71433.67867460428, output: 2773197.0545194685,
-            reasons: { "前道":43035.08909137421, "碰伤":2335.8456336055133, "来料":709.8866069999999, "主与扁未焊合":6772.238753955465, "钎焊":2109.999521488865, "其它":0, "变形":821.9312060583246, "翅片掉带":606.0375293722163, "检测":370.27939468610827, "火焰焊":3383.954340663838, "呛管":0, "错漏装":2062.7929689999996 }
+            name: "暖风", rawScrap: 75226.77804647083, claim: 24.000196, netScrap: 75202.77785047084, output: 2911703.6596844057,
+            reasons: { "前道":45415.11872337974, "碰伤":2529.946994291621, "来料":709.8866069999999, "主与扁未焊合":6884.084476955465, "钎焊":2267.392470174973, "其它":0, "变形":848.9312060583246, "翅片掉带":643.2696870583245, "检测":370.27939468610827, "火焰焊":3455.954928663838, "呛管":0, "错漏装":2185.257676372216 }
         }
     ];
 
-    const totalRawScrap = 528723.0397343535;
-    const totalClaim = 55940.88627269846;
-    const totalNetScrap = 472782.1534616551;
-    const totalOutput = 32292166.774680763;
+    // 合计值（取自最新合计行，7月数据）
+    const totalRawScrap = 557214.0399430103;
+    const totalClaim = 57036.47498337882;
+    const totalNetScrap = 500177.5649596315;
+    const totalOutput = 33881849.180721566;
     const totalActualRate = totalNetScrap / totalOutput;
     const targetOverall = 0.0095;
     const overallRatePercent = (totalActualRate * 100).toFixed(3);
@@ -297,9 +298,11 @@
     const productTargetMap = { "冷凝器":0.01, "油冷器":0.007, "蒸发器":0.01, "水箱":0.012, "内冷":0.006, "暖风":0.01 };
     let overTargetCount = 0;
     productsData.forEach(p => {
-        if(p.netScrap / p.output > productTargetMap[p.name]) overTargetCount++;
+        let actualRateProd = p.netScrap / p.output;
+        if(actualRateProd > productTargetMap[p.name]) overTargetCount++;
     });
 
+    // ========== KPI 卡片渲染 ==========
     const kpiNewData = [
         { icon: "fa-file-invoice-dollar", label: "报废总金额（原始）", value: "¥" + totalRawScrap.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "含未索赔部分" },
         { icon: "fa-hand-holding-usd", label: "索赔抵扣金额", value: "¥" + totalClaim.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ","), sub: "质量索赔收益" },
@@ -308,7 +311,6 @@
         { icon: "fa-industry", label: "总产出（产值）", value: "¥" + (totalOutput / 10000).toFixed(2) + "万", sub: `报废占比${((totalNetScrap/totalOutput)*100).toFixed(2)}%` },
         { icon: "fa-triangle-exclamation", label: "超出目标产品数", value: `${overTargetCount} / 6`, sub: "需重点关注" }
     ];
-
     const container = document.getElementById("newKpiContainer");
     function renderKPI() {
         container.innerHTML = "";
@@ -324,11 +326,13 @@
     }
     renderKPI();
 
-    // ---- 图表1: 各芯体报废率 ----
+    // ========== 图表1: 各芯体报废率 ==========
     const prodNames = productsData.map(p => p.name);
-    const actualRates = productsData.map(p => parseFloat(((p.netScrap / p.output) * 100).toFixed(2)));
-    const targetRates = prodNames.map(name => parseFloat((productTargetMap[name] * 100).toFixed(2)));
-
+    const actualRatesRaw = productsData.map(p => (p.netScrap / p.output) * 100);
+    const actualRates = actualRatesRaw.map(v => parseFloat(v.toFixed(2)));
+    const targetRatesRaw = prodNames.map(name => productTargetMap[name] * 100);
+    const targetRates = targetRatesRaw.map(v => parseFloat(v.toFixed(2)));
+    
     const rateChart = echarts.init(document.getElementById("chart-product-rate"));
     rateChart.setOption({
         tooltip: { trigger: 'axis', valueFormatter: (value) => value.toFixed(2) + '%' },
@@ -350,20 +354,22 @@
         ]
     });
 
-    // ---- 缺陷统计 ----
+    // ========== 缺陷类别统计 ==========
     const defectKeys = ["前道", "碰伤", "来料", "主与扁未焊合", "钎焊", "其它", "变形", "翅片掉带", "检测", "火焰焊", "呛管", "错漏装"];
     let defectAmounts = {};
     defectKeys.forEach(k => defectAmounts[k] = 0);
     productsData.forEach(prod => {
         for(let [dkey, val] of Object.entries(prod.reasons)) {
             if(defectAmounts.hasOwnProperty(dkey)) defectAmounts[dkey] += val;
+            else defectAmounts[dkey] = val;
         }
     });
-    let defectArray = Object.entries(defectAmounts)
-        .filter(([_, v]) => v > 0)
-        .map(([name, amount]) => ({ name, amount, percent: (amount / totalNetScrap) * 100 }))
-        .sort((a,b) => b.amount - a.amount);
-
+    let defectArray = [];
+    for(let [name, amount] of Object.entries(defectAmounts)) {
+        if(amount > 0) defectArray.push({ name, amount, percent: (amount / totalNetScrap) * 100 });
+    }
+    defectArray.sort((a,b) => b.amount - a.amount);
+    
     const mainProductMap = {}, strengthMap = {};
     defectArray.forEach(def => {
         let maxAmount = 0, mainProd = "";
@@ -398,7 +404,7 @@
         series: [{ type: 'pie', radius: '55%', data: pieData, label: { show: true, formatter: '{b}', position: 'outside' }, emphasis: { scale: true }, color: ['#1a73e8','#3b82f6','#60a5fa','#93c5fd','#bfdbfe','#dbeafe','#eff6ff'] }]
     });
 
-    // ---- 根因明细表 ----
+    // ========== 根因明细表 ==========
     const tbodyDefect = document.getElementById("defectTableBody");
     defectArray.forEach(def => {
         const row = document.createElement("tr");
@@ -410,7 +416,7 @@
         tbodyDefect.appendChild(row);
     });
 
-    // ---- 产品归因表 ----
+    // ========== 产品归因表 ==========
     const prodReasonBody = document.getElementById("productReasonBody");
     productsData.forEach(prod => {
         let reasonsArr = [];
@@ -429,7 +435,7 @@
         prodReasonBody.appendChild(row);
     });
 
-    // ---- 脚注 ----
+    // 根因深度分析脚注
     const topDefect = defectArray[0];
     const secondDefect = defectArray[1];
     const thirdDefect = defectArray[2];
@@ -441,10 +447,11 @@
     extraNote.style.fontSize = "12px";
     extraNote.style.border = "1px solid #c0d8ea";
     extraNote.innerHTML = `<i class="fas fa-chart-simple" style="color:#1a73e8;"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷，蒸发器在前道、钎焊及错漏装缺陷中占比极高，建议重点优化蒸发器芯体焊接与前道工序防错。`;
+    
     const lastSection = document.querySelector(".insight-section:last-of-type");
     if(lastSection) lastSection.insertAdjacentElement('afterend', extraNote);
 
-    // 响应式
+    // 响应式图表尺寸调整
     window.addEventListener('resize', () => {
         rateChart.resize();
         rankChart.resize();
