@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>HEX车间 · 报废根因看板 | 2026年7月 蓝色主题</title>
+    <title>HEX车间 · 报废根因看板 | 蓝色背景版</title>
     <!-- ECharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
     <!-- Font Awesome & Google Fonts -->
@@ -16,7 +16,7 @@
             box-sizing: border-box;
         }
         body {
-            background: #eef4fa;
+            background: #b8d4e8; /* 更明显的蓝色背景 */
             font-family: 'Inter', sans-serif;
             padding: 32px 28px;
             color: #1a2c3e;
@@ -44,7 +44,7 @@
             margin-bottom: 6px;
         }
         .title-section p {
-            color: #3b5f7a;
+            color: #1a3f5c;
             font-weight: 500;
             font-size: 14px;
             display: flex;
@@ -53,7 +53,7 @@
             flex-wrap: wrap;
         }
         .badge-date {
-            background: #d4e2f0;
+            background: #ffffffcc;
             border-radius: 40px;
             padding: 6px 16px;
             font-size: 13px;
@@ -73,11 +73,11 @@
             background: white;
             border-radius: 28px;
             padding: 20px 16px;
-            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.06);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.08);
             border: 1px solid #cbdde9;
             transition: all 0.2s;
         }
-        .kpi-card-new:hover { transform: translateY(-3px); box-shadow: 0 20px 30px -12px rgba(26, 115, 232, 0.2); border-color: #7aa9d4; }
+        .kpi-card-new:hover { transform: translateY(-3px); box-shadow: 0 20px 30px -12px rgba(26, 115, 232, 0.25); border-color: #7aa9d4; }
         .kpi-icon-new { font-size: 28px; color: #1a73e8; margin-bottom: 14px; }
         .kpi-label-new { font-size: 14px; font-weight: 600; color: #2c577a; margin-bottom: 8px; }
         .kpi-value-new { font-size: 32px; font-weight: 800; color: #0b3a66; line-height: 1.2; margin-bottom: 6px; word-break: break-word; }
@@ -94,8 +94,8 @@
             background: #ffffff;
             border-radius: 28px;
             padding: 16px 18px 10px 18px;
-            border: 1px solid #d4e2f0;
-            box-shadow: 0 6px 12px rgba(0,0,0,0.02);
+            border: 1px solid #c0d8ea;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.04);
         }
         .chart-header {
             display: flex;
@@ -128,7 +128,7 @@
             background: white;
             border-radius: 28px;
             padding: 8px 0;
-            border: 1px solid #d4e2f0;
+            border: 1px solid #c0d8ea;
             margin-bottom: 24px;
             overflow-x: auto;
         }
@@ -186,9 +186,12 @@
             margin-top: 20px;
             text-align: center;
             font-size: 12px;
-            color: #5a7b96;
-            border-top: 1px solid #d4e2f0;
+            color: #1a3f5c;
+            border-top: 1px solid #c0d8ea;
             padding-top: 20px;
+            background: #ffffffcc;
+            border-radius: 20px;
+            padding: 12px 16px;
         }
         @media (max-width: 1200px) { .three-charts { grid-template-columns: 1fr 1fr; } .three-charts .chart-card:first-child { grid-column: span 2; } }
         @media (max-width: 800px) { .three-charts { grid-template-columns: 1fr; } .three-charts .chart-card:first-child { grid-column: span 1; } }
@@ -201,7 +204,7 @@
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px; color:#1a73e8;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
             <p><i class="far fa-calendar-alt"></i> 2026年7月数据 | 实际报废净额 ¥472,782.15 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
         </div>
-        <div style="background: #d4e2f0; border-radius: 40px; padding: 6px 18px; font-weight: 500; color:#0b3a66;"><i class="fas fa-microchip"></i> 动态看板 · 蓝色主题</div>
+        <div style="background: #ffffffcc; border-radius: 40px; padding: 6px 18px; font-weight: 500; color:#0b3a66;"><i class="fas fa-microchip"></i> 动态看板 · 蓝色背景</div>
     </div>
 
     <!-- KPI卡片区 -->
@@ -436,7 +439,7 @@
     extraNote.style.background = "#f0f7fe";
     extraNote.style.borderRadius = "20px";
     extraNote.style.fontSize = "12px";
-    extraNote.style.border = "1px solid #d4e2f0";
+    extraNote.style.border = "1px solid #c0d8ea";
     extraNote.innerHTML = `<i class="fas fa-chart-simple" style="color:#1a73e8;"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷，蒸发器在前道、钎焊及错漏装缺陷中占比极高，建议重点优化蒸发器芯体焊接与前道工序防错。`;
     const lastSection = document.querySelector(".insight-section:last-of-type");
     if(lastSection) lastSection.insertAdjacentElement('afterend', extraNote);
