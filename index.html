@@ -4,27 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>HEX车间 · 报废根因看板 | 2026年10月 深蓝背景</title>
-    <!-- ECharts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <!-- Font Awesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #1a3a5c;
             font-family: 'Inter', sans-serif;
             padding: 32px 28px;
             color: #1a2c3e;
         }
-        .dashboard {
-            max-width: 1500px;
-            margin: 0 auto;
-        }
+        .dashboard { max-width: 1500px; margin: 0 auto; }
         .header {
             margin-bottom: 28px;
             display: flex;
@@ -60,7 +51,6 @@
             font-weight: 600;
             color: #0b3a66;
         }
-        /* KPI 6卡片 */
         .kpi-grid-new {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -83,7 +73,6 @@
         .kpi-value-new { font-size: 32px; font-weight: 800; color: #0b3a66; line-height: 1.2; margin-bottom: 6px; word-break: break-word; }
         .kpi-sub-new { font-size: 12px; color: #5a7b96; border-top: 1px solid #dde9f3; margin-top: 10px; padding-top: 8px; display: flex; justify-content: space-between; }
 
-        /* 三图布局 */
         .three-charts {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -105,11 +94,7 @@
             border-bottom: 2px solid #d4e2f0;
             padding-bottom: 10px;
         }
-        .chart-header h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1a5a8c;
-        }
+        .chart-header h3 { font-size: 18px; font-weight: 700; color: #1a5a8c; }
         .chart-header span {
             font-size: 12px;
             background: #d4e2f0;
@@ -118,12 +103,8 @@
             font-weight: 500;
             color: #1a5a8c;
         }
-        .chart-container {
-            width: 100%;
-            height: 300px;
-        }
+        .chart-container { width: 100%; height: 300px; }
 
-        /* 表格样式 */
         .insight-section {
             background: white;
             border-radius: 28px;
@@ -203,15 +184,13 @@
     <div class="header">
         <div class="title-section">
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px; color:#4a9af0;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
-            <p><i class="far fa-calendar-alt"></i> 2026年10月数据 | 实际报废净额 ¥187,246.48 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
+            <p><i class="far fa-calendar-alt"></i> 2026年10月数据 | 实际报废净额 ¥216,722.51 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
         </div>
         <div style="background: #ffffffcc; border-radius: 40px; padding: 6px 18px; font-weight: 500; color:#0b3a66;"><i class="fas fa-microchip"></i> 动态看板 · 深蓝背景</div>
     </div>
 
-    <!-- KPI卡片区 -->
     <div class="kpi-grid-new" id="newKpiContainer"></div>
 
-    <!-- 三图区 -->
     <div class="three-charts">
         <div class="chart-card">
             <div class="chart-header">
@@ -236,7 +215,6 @@
         </div>
     </div>
 
-    <!-- TOP10产品报废排行 -->
     <div class="section-title"><i class="fas fa-trophy"></i> 10月TOP10产品报废金额排行</div>
     <div class="insight-section">
         <table class="defect-table top10-table" id="top10Table">
@@ -245,19 +223,18 @@
         </table>
     </div>
 
-    <!-- 根因明细表 -->
     <div class="section-title"><i class="fas fa-table-list"></i> 报废根因深度明细 · 影响产品矩阵</div>
     <div class="insight-section">
         <table class="defect-table" id="defectTable">
-            <thead><tr><th>缺陷类别</th><th>总报废金额 (￥)</th><th>占报废总额比例</th><th>主要影响产品</th><th>相对强度</th></thead>
+            <thead><tr><th>缺陷类别</th><th>总报废金额 (￥)</th><th>占报废总额比例</th><th>主要影响产品</th><th>相对强度</th></tr></thead>
             <tbody id="defectTableBody"></tbody>
         </table>
     </div>
-    
+
     <div class="section-title"><i class="fas fa-microscope"></i> 核心产品缺陷归因 · 金额热力摘要</div>
     <div class="insight-section">
         <table class="defect-table" id="productReasonTable">
-            <thead><tr><th>产品类别</th><th>报废总额(元)</th><th>前三大报废原因</th><th>主要风险点</th></thead>
+            <thead><tr><th>产品类别</th><th>报废总额(元)</th><th>前三大报废原因</th><th>主要风险点</th></tr></thead>
             <tbody id="productReasonBody"></tbody>
         </table>
     </div>
@@ -267,53 +244,53 @@
 </div>
 
 <script>
-    // ======================= 2026年10月最新数据 =======================
+    // ======================= 2026年10月 Excel 原始数据 =======================
     const productsData = [
-        { 
-            name: "冷凝器", rawScrap: 31283.627281078047, claim: 2596.27121587734, netScrap: 28687.356065200707, output: 1969167.9717571249,
-            reasons: { "前道":11401.218236578276, "碰伤":3959.94407375468, "来料":2948.6972518773405, "主与扁未焊合":1224.651450301872, "钎焊":1366.5436635754677, "其它":599.105187, "变形":2437.477175207488, "翅片掉带":2064.97877887734, "检测":1041.229208301872, "火焰焊":1367.081586575468, "呛管":0, "错漏装":791.3447771509359 }
+        {
+            name: "冷凝器", rawScrap: 35296.83478618365, claim: 3087.052139452808, netScrap: 32209.782646730844, output: 2190754.4081753134,
+            reasons: { "前道":12250.062705778277, "碰伤":4201.577638905616, "来料":3439.478175452809, "主与扁未焊合":1224.651450301872, "钎焊":1594.3768865754676, "其它":798.806916, "变形":2673.271457782956, "翅片掉带":2161.78619287734, "检测":2044.226884028276, "火焰焊":1645.7883971509361, "呛管":0, "错漏装":791.3447771509359 }
         },
-        { 
-            name: "油冷器", rawScrap: 2890.9200891999994, claim: 68.153282, netScrap: 2822.766807199999, output: 106889.88631329109,
-            reasons: { "前道":282.22805819999996, "碰伤":1064.368854, "来料":68.153282, "主与扁未焊合":68.153282, "钎焊":426.782426, "其它":815.95151, "变形":0, "翅片掉带":68.153282, "检测":68.153282, "火焰焊":218.443468, "呛管":0, "错漏装":27.378968 }
+        {
+            name: "油冷器", rawScrap: 3090.6218181999993, claim: 68.153282, netScrap: 3022.468536199999, output: 106889.88631329109,
+            reasons: { "前道":282.22805819999996, "碰伤":1064.368854, "来料":68.153282, "主与扁未焊合":68.153282, "钎焊":426.782426, "其它":1403.1133308821059, "变形":0, "翅片掉带":68.153282, "检测":68.153282, "火焰焊":218.443468, "呛管":0, "错漏装":27.378968 }
         },
-        { 
-            name: "蒸发器", rawScrap: 90261.14490524789, claim: 8862.461280040043, netScrap: 81398.68362520784, output: 8711618.083601395,
-            reasons: { "前道":30777.017996112696, "碰伤":9247.271869865303, "来料":10247.124703153735, "主与扁未焊合":11551.365904987397, "钎焊":10567.729541861101, "其它":5638.835518000001, "变形":817.7398588821059, "翅片掉带":1038.8429835284232, "检测":2146.839552231587, "火焰焊":6461.193928345278, "呛管":0, "错漏装":6590.067056280032 }
+        {
+            name: "蒸发器", rawScrap: 101491.23468192802, claim: 9048.566412040043, netScrap: 92442.66826988797, output: 9239928.318566285,
+            reasons: { "前道":33740.18292468323, "碰伤":9615.16200451162, "来料":10512.043408035841, "主与扁未焊合":15002.550465162138, "钎焊":11348.487566271631, "其它":10601.397014, "变形":975.3670046463175, "翅片掉带":1038.8429835284232, "检测":3982.7077854063264, "火焰焊":6752.828715227384, "呛管":0, "错漏装":7119.948493572668 }
         },
-        { 
-            name: "水箱", rawScrap: 27160.898419852005, claim: 0, netScrap: 27160.898419852005, output: 1338197.4490974317,
-            reasons: { "前道":13843.358799852, "碰伤":944.5229679999999, "来料":0, "主与扁未焊合":2194.549549, "钎焊":1425.666674, "其它":432.38434521461176, "变形":1105.046825, "翅片掉带":110.782629, "检测":446.685118, "火焰焊":444.495894, "呛管":0, "错漏装":1006.9544450000001 }
+        {
+            name: "水箱", rawScrap: 35565.25711690701, claim: 0, netScrap: 35565.25711690701, output: 1510683.7563905532,
+            reasons: { "前道":16494.281290907, "碰伤":1042.640046, "来料":0, "主与扁未焊合":2194.549549, "钎焊":1425.666674, "其它":556.4030612146117, "变形":1255.1914849999998, "翅片掉带":110.782629, "检测":989.29809, "火焰焊":444.495894, "呛管":0, "错漏装":1006.9544450000001 }
         },
-        { 
-            name: "内冷", rawScrap: 18396.13712820919, claim: 324.219369, netScrap: 18071.91775920919, output: 2307678.3690008204,
-            reasons: { "前道":12533.314810455748, "碰伤":1442.2625694292235, "来料":324.219369, "主与扁未焊合":943.2994264292236, "钎焊":681.6037142146117, "其它":2244.223361233298, "变形":204.01871599999998, "翅片掉带":206.69786, "检测":862.5304978219176, "火焰焊":624.8598096438354, "呛管":0, "错漏装":111.81257699999999 }
+        {
+            name: "内冷", rawScrap: 20800.694820639575, claim: 460.25385660730586, netScrap: 20340.44096403227, output: 2485001.118605649,
+            reasons: { "前道":13093.658901813054, "碰伤":1719.4334344292238, "来料":460.25385660730586, "主与扁未焊合":943.2994264292236, "钎焊":895.0250886438354, "其它":2505.3258336055146, "变形":204.01871599999998, "翅片掉带":420.1192344292235, "检测":1689.3219378219183, "火焰焊":678.2151532511414, "呛管":0, "错漏装":111.81257699999999 }
         },
-        { 
-            name: "暖风", rawScrap: 29104.86157198039, claim: 0, netScrap: 29104.86157198039, output: 1423013.0667630555,
-            reasons: { "前道":21531.25801922217, "碰伤":591.6866406861081, "来料":0, "主与扁未焊合":2815.822404488865, "钎焊":730.444177430541, "其它":0, "变形":218.20025474443278, "翅片掉带":43.641498, "检测":267.86114805832466, "火焰焊":290.11349305832465, "呛管":0, "错漏装":371.6105750583246 }
+        {
+            name: "暖风", rawScrap: 33141.890774168656, claim: 0, netScrap: 33141.890774168656, output: 1625883.6475631217,
+            reasons: { "前道":24505.401876491018, "碰伤":639.8468436861081, "来料":0, "主与扁未焊合":3263.2833056055138, "钎焊":754.444373430541, "其它":0, "变形":218.20025474443278, "翅片掉带":43.641498, "检测":267.86114805832466, "火焰焊":497.8107501166493, "呛管":0, "错漏装":446.074890430541 }
         }
     ];
 
-    // TOP10 产品明细（从Excel中提取）
+    // TOP10 产品明细（Excel 原始数据）
     const top10Data = [
-        { rank:1, model:"V710低温水箱", amount:13789.885854470002, percent:0.08220299311014401 },
-        { rank:2, model:"VAVE内冷", amount:13629.47473936, percent:0.08124676519576256 },
-        { rank:3, model:"T05蒸发器", amount:11487.233489865317, percent:0.06847663464276779 },
-        { rank:4, model:"V710高温水箱", amount:10515.335160462, percent:0.06268304414326385 },
-        { rank:5, model:"KX11蒸发器", amount:7591.0198230399965, percent:0.04525088581571195 },
-        { rank:6, model:"KX11暖风", amount:7465.407784800001, percent:0.04450209894227699 },
-        { rank:7, model:"W02后蒸发器", amount:7192.1442009474185, percent:0.042873145320923726 },
-        { rank:8, model:"MS11蒸发器", amount:6768.313144199999, percent:0.040346642795423875 },
-        { rank:9, model:"X1325冷凝器", amount:6729.248796509338, percent:0.04011377601625276 },
-        { rank:10, model:"岚图冷凝器", amount:6309.346234750003, percent:0.037610691672008846 }
+        { rank:1, model:"V710低温水箱", amount:17267.035353320007, percent:0.08850318941863221 },
+        { rank:2, model:"V710高温水箱", amount:15052.448156597, percent:0.07715219452314954 },
+        { rank:3, model:"VAVE内冷", amount:15044.183960840013, percent:0.07710983590932227 },
+        { rank:4, model:"T05蒸发器", amount:14578.237874103232, percent:0.07472160226472 },
+        { rank:5, model:"MS11蒸发器", amount:9667.8026942, percent:0.049552882449055126 },
+        { rank:6, model:"KX11蒸发器", amount:8287.962101839996, percent:0.042480429603832075 },
+        { rank:7, model:"KX11暖风", amount:8238.9053184, percent:0.04222898622005375 },
+        { rank:8, model:"X1325冷凝器", amount:7574.9662745376145, percent:0.03882592821044122 },
+        { rank:9, model:"W02后蒸发器", amount:7270.957773829525, percent:0.037267715038782366 },
+        { rank:10, model:"岚图冷凝器", amount:6459.057446750003, percent:0.03310627290547762 }
     ];
 
-    // 合计值（取自最新合计行，10月数据）
-    const totalRawScrap = 199097.5893955675;
-    const totalClaim = 11851.105146917384;
-    const totalNetScrap = 187246.48424865014;
-    const totalOutput = 17442221.309186433;
+    // 合计值（Excel 合计行）
+    const totalRawScrap = 229386.53399802692;
+    const totalClaim = 12664.025690100158;
+    const totalNetScrap = 216722.50830792676;
+    const totalOutput = 18875055.249175634;
     const totalActualRate = totalNetScrap / totalOutput;
     const targetOverall = 0.0095;
     const overallRatePercent = (totalActualRate * 100).toFixed(3);
@@ -367,7 +344,7 @@
     const actualRates = actualRatesRaw.map(v => parseFloat(v.toFixed(2)));
     const targetRatesRaw = prodNames.map(name => productTargetMap[name] * 100);
     const targetRates = targetRatesRaw.map(v => parseFloat(v.toFixed(2)));
-    
+
     const rateChart = echarts.init(document.getElementById("chart-product-rate"));
     rateChart.setOption({
         tooltip: { trigger: 'axis', valueFormatter: (value) => value.toFixed(2) + '%' },
@@ -375,16 +352,16 @@
         xAxis: { type: 'category', data: prodNames, axisLabel: { rotate: 20, fontWeight: 500 } },
         yAxis: { type: 'value', name: '报废率 (%)', axisLabel: { formatter: '{value}%' } },
         series: [
-            { 
-                name: '实际报废率 (%)', type: 'bar', data: actualRates, 
-                itemStyle: { borderRadius: [6,6,0,0], color: '#1a73e8' }, 
-                label: { show: true, position: 'top', formatter: (params) => params.value.toFixed(2) + '%' } 
+            {
+                name: '实际报废率 (%)', type: 'bar', data: actualRates,
+                itemStyle: { borderRadius: [6,6,0,0], color: '#1a73e8' },
+                label: { show: true, position: 'top', formatter: (params) => params.value.toFixed(2) + '%' }
             },
-            { 
-                name: '目标控制率 (%)', type: 'line', data: targetRates, 
-                lineStyle: { width: 2, color: '#f4a261', type: 'dashed' }, 
-                symbol: 'circle', symbolSize: 8, itemStyle: { color: '#e76f51' }, 
-                label: { show: true, position: 'top', formatter: (params) => params.value.toFixed(2) + '%' } 
+            {
+                name: '目标控制率 (%)', type: 'line', data: targetRates,
+                lineStyle: { width: 2, color: '#f4a261', type: 'dashed' },
+                symbol: 'circle', symbolSize: 8, itemStyle: { color: '#e76f51' },
+                label: { show: true, position: 'top', formatter: (params) => params.value.toFixed(2) + '%' }
             }
         ]
     });
@@ -404,7 +381,7 @@
         if(amount > 0) defectArray.push({ name, amount, percent: (amount / totalNetScrap) * 100 });
     }
     defectArray.sort((a,b) => b.amount - a.amount);
-    
+
     const mainProductMap = {}, strengthMap = {};
     defectArray.forEach(def => {
         let maxAmount = 0, mainProd = "";
@@ -482,11 +459,10 @@
     extraNote.style.fontSize = "12px";
     extraNote.style.border = "1px solid #c0d8ea";
     extraNote.innerHTML = `<i class="fas fa-chart-simple" style="color:#1a73e8;"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷，蒸发器在前道、主与扁未焊合及钎焊缺陷中占比极高，建议重点优化蒸发器芯体焊接与前道工序防错。`;
-    
+
     const lastSection = document.querySelector(".insight-section:last-of-type");
     if(lastSection) lastSection.insertAdjacentElement('afterend', extraNote);
 
-    // 响应式图表尺寸调整
     window.addEventListener('resize', () => {
         rateChart.resize();
         rankChart.resize();
