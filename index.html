@@ -184,7 +184,7 @@
     <div class="header">
         <div class="title-section">
             <h1><i class="fas fa-chalkboard-user" style="margin-right: 12px; color:#4a9af0;"></i>HEX车间 · 报废根因追溯 & 金额排行</h1>
-            <p><i class="far fa-calendar-alt"></i> 2026年11月数据 | 实际报废净额 ¥86,707.94 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
+            <p><i class="far fa-calendar-alt"></i> 2026年11月数据 | 实际报废净额 ¥104,765.15 &nbsp;|&nbsp; <span class="badge-date"><i class="fas fa-chart-simple"></i> 各芯体报废率保留两位小数</span></p>
         </div>
         <div style="background: #ffffffcc; border-radius: 40px; padding: 6px 18px; font-weight: 500; color:#0b3a66;"><i class="fas fa-microchip"></i> 动态看板 · 深蓝背景</div>
     </div>
@@ -247,50 +247,50 @@
     // ======================= 2026年11月 Excel 最新数据 =======================
     const productsData = [
         {
-            name: "冷凝器", rawScrap: 22027.78742025637, claim: 3559.90316075468, netScrap: 18467.88425950169, output: 725689.6290430258,
-            reasons: { "前道":3822.7770252754676, "碰伤":7109.517885839509, "来料":4116.328045905616, "主与扁未焊合":1421.703522575468, "钎焊":633.198930150936, "其它":0, "变形":803.022706452808, "翅片掉带":512.161559726404, "检测":640.095378150936, "火焰焊":480.516718726404, "呛管":0, "错漏装":329.923974 }
+            name: "冷凝器", rawScrap: 25177.67240213839, claim: 3801.536725905616, netScrap: 21376.135676232774, output: 821726.2854283524,
+            reasons: { "前道":5093.050268525467, "碰伤":8076.052146443254, "来料":4116.328045905616, "主与扁未焊合":1421.703522575468, "钎焊":1358.099625603744, "其它":0, "变形":803.022706452808, "翅片掉带":512.161559726404, "检测":640.095378150936, "火焰焊":601.333501301872, "呛管":0, "错漏装":329.923974 }
         },
         {
-            name: "油冷器", rawScrap: 344.4617652, claim: 0, netScrap: 344.4617652, output: 22115.148892405054,
-            reasons: { "前道":344.4617652, "碰伤":0, "来料":0, "主与扁未焊合":0, "钎焊":0, "其它":1790.2901377031637, "变形":0, "翅片掉带":0, "检测":0, "火焰焊":0, "呛管":0, "错漏装":0 }
+            name: "油冷器", rawScrap: 498.7196578, claim: 0, netScrap: 498.7196578, output: 56025.04386075947,
+            reasons: { "前道":498.7196578, "碰伤":0, "来料":0, "主与扁未焊合":0, "钎焊":0, "其它":1915.3868287031637, "变形":0, "翅片掉带":0, "检测":0, "火焰焊":0, "呛管":0, "错漏装":0 }
         },
         {
-            name: "蒸发器", rawScrap: 36561.046768195905, claim: 6764.58261557687, netScrap: 29796.464152619035, output: 2208822.1003723377,
-            reasons: { "前道":12066.51740840844, "碰伤":4108.704900524221, "来料":7071.412675223187, "主与扁未焊合":2521.8825012926345, "钎焊":2653.1869484063272, "其它":913.6365360000001, "变形":661.7480142926347, "翅片掉带":100, "检测":154.70735, "火焰焊":3099.6212667600107, "呛管":0, "错漏装":2332.9755655852696 }
+            name: "蒸发器", rawScrap: 46117.00654033067, claim: 9513.919697572668, netScrap: 36603.086842758006, output: 3108455.390749711,
+            reasons: { "前道":14558.166650669495, "碰伤":4488.124217288433, "来料":10057.190475865304, "主与扁未焊合":4966.692297938954, "钎焊":3097.401069816856, "其它":1456.249508, "变形":661.7480142926347, "翅片掉带":100, "检测":154.70735, "火焰焊":3476.840667406328, "呛管":0, "错漏装":2640.748968349481 }
         },
         {
-            name: "水箱", rawScrap: 16438.896570570007, claim: 0, netScrap: 16438.896570570007, output: 469275.63031241065,
-            reasons: { "前道":10357.87669057, "碰伤":1669.183912, "来料":0, "主与扁未焊合":0, "钎焊":1651.5912599999997, "其它":453.3067574292235, "变形":975.9402899999999, "翅片掉带":412.28919299999995, "检测":210.116951, "火焰焊":0, "呛管":0, "错漏装":248.261738 }
+            name: "水箱", rawScrap: 19000.418649580002, claim: 0, netScrap: 19000.418649580002, output: 623349.2888515425,
+            reasons: { "前道":11955.33465158, "碰伤":1744.256242, "来料":0, "主与扁未焊合":173.18940800000001, "钎焊":1749.7083379999997, "其它":453.3067574292235, "变形":1051.01262, "翅片掉带":412.28919299999995, "检测":210.116951, "火焰焊":0, "呛管":0, "错漏装":248.261738 }
         },
         {
-            name: "内冷", rawScrap: 8617.62407226913, claim: 198.82148899999999, netScrap: 8418.80258326913, output: 736863.9728886981,
-            reasons: { "前道":5222.260540301093, "碰伤":572.4090288219177, "来料":252.1768326073059, "主与扁未焊合":172.8926242146118, "钎焊":833.5149544292236, "其它":2203.0575736415703, "变形":216.531948, "翅片掉带":86.8185446073059, "检测":82.679144, "火焰焊":518.6778726438354, "呛管":0, "错漏装":206.3558252146118 }
+            name: "内冷", rawScrap: 10591.84902112027, claim: 281.500633, netScrap: 10310.34838812027, output: 1022893.9666659238,
+            reasons: { "前道":6657.639795901093, "碰伤":892.5410904657532, "来料":334.8559766073059, "主与扁未焊合":172.8926242146118, "钎焊":916.1940984292236, "其它":2297.4490183276785, "变形":216.531948, "翅片掉带":86.8185446073059, "检测":82.679144, "火焰焊":572.0332162511413, "呛管":0, "错漏装":206.3558252146118 }
         },
         {
-            name: "暖风", rawScrap: 13241.433920702546, claim: 0, netScrap: 13241.433920702546, output: 594564.0493052305,
-            reasons: { "前道":8175.886606908272, "碰伤":332.8696517444328, "来料":24.000196, "主与扁未焊合":975.206624430541, "钎焊":266.3510753722164, "其它":0, "变形":154.817082, "翅片掉带":260.6251038027574, "检测":176.57913100000002, "火焰焊":392.79559080275743, "呛管":0, "错漏装":279.245285 }
+            name: "暖风", rawScrap: 16976.443449235838, claim: 0, netScrap: 16976.443449235838, output: 808161.9593778184,
+            reasons: { "前道":10242.634230208272, "碰伤":369.5780637444328, "来料":81.657069, "主与扁未焊合":2359.803323291623, "钎焊":302.2066453722164, "其它":0, "变形":154.817082, "翅片掉带":260.6251038027574, "检测":176.57913100000002, "火焰焊":430.02774848886565, "呛管":0, "错漏装":301.066034 }
         }
     ];
 
     // TOP10 产品明细（Excel 最新数据，11月）
     const top10Data = [
-        { rank:1, model:"V710低温水箱", amount:8512.8461046, percent:0.10758347223214769 },
-        { rank:2, model:"X1325冷凝器", amount:7206.191945348871, percent:0.09107026504720242 },
-        { rank:3, model:"V710高温水箱", amount:6407.5021835200005, percent:0.08097659992533605 },
-        { rank:4, model:"T05蒸发器", amount:5249.392106117925, percent:0.06634066009710032 },
-        { rank:5, model:"VAVE内冷", amount:3961.1199731999986, percent:0.05005976090824581 },
-        { rank:6, model:"VAVE蒸发器", amount:3569.421001600001, percent:0.04510955566352534 },
-        { rank:7, model:"岚图冷凝器", amount:3173.023878, percent:0.04009997620963625 },
-        { rank:8, model:"LEO蒸发器", amount:3034.6538839999994, percent:0.038351286732069216 },
-        { rank:9, model:"CMA3.0暖风", amount:2744.686005108167, percent:0.03468673660821378 },
-        { rank:10, model:"EX1H蒸发器", amount:2690.847905109491, percent:0.0340063425701835 }
+        { rank:1, model:"V710低温水箱", amount:9802.255918710007, percent:0.10208133176385284 },
+        { rank:2, model:"X1325冷凝器", amount:8948.310118829955, percent:0.09318828456851129 },
+        { rank:3, model:"V710高温水箱", amount:7679.614448420001, percent:0.0799760052001181 },
+        { rank:4, model:"T05蒸发器", amount:6097.288915656879, percent:0.06349756401189165 },
+        { rank:5, model:"VAVE内冷", amount:4452.8387785999985, percent:0.04637215314707224 },
+        { rank:6, model:"VAVE蒸发器", amount:4125.226517240001, percent:0.042960377713015106 },
+        { rank:7, model:"岚图冷凝器", amount:3173.023878, percent:0.033044077391051384 },
+        { rank:8, model:"CMA3.0暖风", amount:3154.2397396553574, percent:0.03284845815052558 },
+        { rank:9, model:"LEO蒸发器", amount:3134.6538839999994, percent:0.03264448977369334 },
+        { rank:10, model:"SX11冷凝器", amount:3072.4743149509354, percent:0.03199694769055762 }
     ];
 
     // 合计值（Excel 最新合计行）
-    const totalRawScrap = 97231.25051719396;
-    const totalClaim = 10523.30726533155;
-    const totalNetScrap = 86707.94325186242;
-    const totalOutput = 5233063.583895519;
+    const totalRawScrap = 118362.10972020518;
+    const totalClaim = 13596.957056478284;
+    const totalNetScrap = 104765.15266372688;
+    const totalOutput = 7084673.1284275185;
     const totalActualRate = totalNetScrap / totalOutput;
     const targetOverall = 0.0095;
     const overallRatePercent = (totalActualRate * 100).toFixed(3);
@@ -299,7 +299,6 @@
     const productTargetMap = { "冷凝器":0.01, "油冷器":0.007, "蒸发器":0.01, "水箱":0.012, "内冷":0.006, "暖风":0.01 };
     let overTargetCount = 0;
     productsData.forEach(p => {
-        // 产值为0时报废率无法计算，按超标处理（无法证明达标）
         if (p.output === 0) { overTargetCount++; return; }
         let actualRateProd = p.netScrap / p.output;
         if(actualRateProd > productTargetMap[p.name]) overTargetCount++;
@@ -342,7 +341,6 @@
 
     // ========== 图表1: 各芯体报废率 ==========
     const prodNames = productsData.map(p => p.name);
-    // 产值为0时报废率按0处理，避免 NaN
     const actualRatesRaw = productsData.map(p => p.output === 0 ? 0 : (p.netScrap / p.output) * 100);
     const actualRates = actualRatesRaw.map(v => parseFloat(v.toFixed(2)));
     const targetRatesRaw = prodNames.map(name => productTargetMap[name] * 100);
@@ -464,7 +462,7 @@
     extraNote.style.borderRadius = "20px";
     extraNote.style.fontSize = "12px";
     extraNote.style.border = "1px solid #c0d8ea";
-    extraNote.innerHTML = `<i class="fas fa-chart-simple" style="color:#1a73e8;"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷。11月冷凝器碰伤占比 32.28% 已超过前道（17.35%），成为该产品首要缺陷；水箱、内冷、暖风的前道占比均超过 60%，前道工序仍是车间级最大风险源。`;
+    extraNote.innerHTML = `<i class="fas fa-chart-simple" style="color:#1a73e8;"></i> 报废根因深度分析：<strong>${topDefect?.name || ''}(¥${(topDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，占比${topDefect?.percent.toFixed(2) || 0}%)、${secondDefect?.name || ''}(¥${(secondDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${secondDefect?.percent.toFixed(2) || 0}%)、${thirdDefect?.name || ''}(¥${(thirdDefect?.amount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}，${thirdDefect?.percent.toFixed(2) || 0}%)</strong>为主要TOP3缺陷。11月冷凝器碰伤占比 32.08% 已明显高于前道（20.23%），成为该产品首要缺陷；水箱、内冷、暖风的前道占比仍超 60%，前道工序是车间级最大风险源。蒸发器来料缺陷占比升至 21.81%，需关注来料质量。`;
 
     const lastSection = document.querySelector(".insight-section:last-of-type");
     if(lastSection) lastSection.insertAdjacentElement('afterend', extraNote);
